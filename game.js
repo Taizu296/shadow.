@@ -274,7 +274,7 @@ y = Math.max(30, Math.min(worldHeight - 30, y));
 function closestEnemy() {
 
   let closest = null;
-  let closestDistance = Infinity;
+  let closestDistance = 450;
 
   enemies.forEach(enemy => {
 
@@ -284,11 +284,13 @@ function closestEnemy() {
     const distance = Math.hypot(dx, dy);
 
     if (distance < closestDistance) {
-
       closestDistance = distance;
       closest = enemy;
     }
   });
+
+  return closest;
+}
 
   return closest;
 }

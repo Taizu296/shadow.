@@ -400,16 +400,6 @@ function spawnBoss() {
   waveBoss = bossData;
 }
 
-  boss.style.left = x + "px";
-  boss.style.top = y + "px";
-
-  world.appendChild(boss);
-
-  enemies.push(bossData);
-
-  waveBoss = bossData;
-}
-
 /* -------------------------
    FIND CLOSEST ENEMY
 ------------------------- */

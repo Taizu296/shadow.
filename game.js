@@ -376,26 +376,8 @@ function killEnemy(enemy) {
   enemies = enemies.filter(e => e !== enemy);
 
   kills++;
-  xp++;
 
-  killsText.textContent = kills;
-
-  if (xp >= xpNeeded) {
-
-  level++;
-
-  xp = 0;
-
-  xpNeeded = Math.ceil(xpNeeded * 1.4);
-
-  levelText.textContent = level;
-
-  showLevelUp();
-}
-
-  xpFill.style.width =
-    (xp / xpNeeded * 100) + "%";
-}
+killsText.textContent = kills;
 
 
 /* -------------------------

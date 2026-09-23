@@ -726,21 +726,18 @@ enemies.forEach(enemy => {
   let fillColor = "#7a1028";
   let borderColor = "#ff304f";
 
-  // Schneller Gegner
   if (enemy.type === "bat") {
     radius = 16;
     fillColor = "#442080";
     borderColor = "#a66cff";
   }
 
-  // Tank
   if (enemy.type === "tank") {
     radius = 29;
     fillColor = "#551515";
     borderColor = "#ff704d";
   }
 
-  // Boss
   if (enemy.isBoss) {
     radius = 43;
     fillColor = "#420018";
@@ -756,10 +753,6 @@ enemies.forEach(enemy => {
     Math.PI * 2
   );
 
-  /* Move enemies */
-
-  enemies.forEach(enemy => {
-
   ctx.fillStyle = fillColor;
   ctx.fill();
 
@@ -768,45 +761,53 @@ enemies.forEach(enemy => {
   ctx.stroke();
 });
 
-    const dx = playerX - enemy.x;
-    const dy = playerY - enemy.y;
 
-    const distance = Math.hypot(dx, dy);
+/* MOVE ENEMIES */
 
+enemies.forEach(enemy => {
+
+  const dx = playerX - enemy.x;
+  const dy = playerY - enemy.y;
+
+  const distance = Math.hypot(dx, dy);
+
+  if (distance > 0) {
     enemy.x +=
       (dx / distance) * enemy.speed;
 
     enemy.y +=
       (dy / distance) * enemy.speed;
+  }
 
-    /* Enemy hits player */
 
-    if (distance < 38) {
+  /* Enemy hits player */
 
-      let contactDamage = 0.15;
+  if (distance < 38) {
 
-if (enemy.type === "bat") {
-  contactDamage = 0.08;
-}
+    let contactDamage = 0.15;
 
-if (enemy.type === "tank") {
-  contactDamage = 0.35;
-}
-
-if (enemy.isBoss) {
-  contactDamage = 0.6;
-}
-
-hp -= contactDamage;
-
-      hpText.textContent =
-        Math.max(0, Math.ceil(hp));
-
-      if (hp <= 0) {
-        gameOver();
-      }
+    if (enemy.type === "bat") {
+      contactDamage = 0.08;
     }
-  });
+
+    if (enemy.type === "tank") {
+      contactDamage = 0.35;
+    }
+
+    if (enemy.isBoss) {
+      contactDamage = 0.6;
+    }
+
+    hp -= contactDamage;
+
+    hpText.textContent =
+      Math.max(0, Math.ceil(hp));
+
+    if (hp <= 0) {
+      gameOver();
+    }
+  }
+});
 
 
   /* Move projectiles */

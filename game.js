@@ -482,6 +482,34 @@ function killEnemy(enemy) {
   kills++;
 
   killsText.textContent = kills;
+  
+  /* SCORE */
+
+let points = 100;
+
+if (enemy.type === "bat") {
+  points = 150;
+}
+
+if (enemy.type === "tank") {
+  points = 300;
+}
+
+if (enemy.isBoss) {
+  points = 1000 * wave;
+}
+
+score += points;
+
+scoreText.textContent = score;
+
+/* HIGHSCORE */
+
+if (score > highscore) {
+  highscore = score;
+  localStorage.setItem("shadowHighscore", highscore);
+  highscoreText.textContent = highscore;
+}
 
   /* Boss besiegt */
 

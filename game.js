@@ -20,6 +20,9 @@ let playerY = worldHeight / 2;
 let hp = 100;
 let kills = 0;
 
+let score = 0;
+let highscore = Number(localStorage.getItem("shadowHighscore")) || 0;
+
 let level = 1;
 let xp = 0;
 let xpNeeded = 5;

@@ -273,6 +273,37 @@ if (side === 3) {
   y = playerY + (Math.random() - 0.5) * window.innerHeight;
 }
 
+function spawnBoss() {
+
+  if (!gameRunning || waveBoss) return;
+
+  const boss = document.createElement("div");
+
+  boss.className = "enemy boss";
+  boss.innerHTML = "👿";
+
+  const x = Math.min(worldWidth - 80, playerX + 400);
+  const y = playerY;
+
+  const bossData = {
+    element: boss,
+    x: x,
+    y: y,
+    hp: 30 + (wave - 1) * 10,
+    speed: 0.45,
+    isBoss: true
+  };
+
+  boss.style.left = x + "px";
+  boss.style.top = y + "px";
+
+  world.appendChild(boss);
+
+  enemies.push(bossData);
+
+  waveBoss = bossData;
+}
+
 /* Innerhalb der Map halten */
 
 x = Math.max(30, Math.min(worldWidth - 30, x));

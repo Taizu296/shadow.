@@ -11,6 +11,9 @@ const killsText = document.getElementById("kills");
 const levelText = document.getElementById("level");
 const xpFill = document.getElementById("xpfill");
 
+const waveText = document.getElementById("wave");
+const waveTimerText = document.getElementById("waveTimer");
+
 let playerX = worldWidth / 2;
 let playerY = worldHeight / 2;
 

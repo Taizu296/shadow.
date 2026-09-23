@@ -94,6 +94,11 @@ let playerSpeed = 4.5;
 let projectileSpeed = 7;
 let projectileSize = 13;
 let multishot = 1;
+let beamDamage = 2;
+let beamCooldown = 2200;
+let beamWidth = 12;
+let beamRange = 550;
+let lastBeamTime = 0;
 
 /* -------------------------
    WEAPON SYSTEM

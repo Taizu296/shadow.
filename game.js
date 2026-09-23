@@ -742,6 +742,27 @@ enemies.forEach(enemy => {
   ctx.stroke();
 });
 
+/* DRAW PROJECTILES ON CANVAS */
+
+projectiles.forEach(projectile => {
+
+  ctx.beginPath();
+
+  ctx.arc(
+    projectile.x,
+    projectile.y,
+    projectileSize / 2,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fillStyle = "#b44cff";
+  ctx.fill();
+
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "#e6b3ff";
+  ctx.stroke();
+});
 
 /* MOVE ENEMIES */
 

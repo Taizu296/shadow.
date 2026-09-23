@@ -470,11 +470,10 @@ projectiles.push(projectileData);
 function spawnXpOrb(x, y, value = 1) {
 
   xpOrbs.push({
-    element: orb,
-    x: x,
-    y: y,
-    value: value
-  });
+  x: x,
+  y: y,
+  value: value
+});
 }
 
 function killEnemy(enemy) {

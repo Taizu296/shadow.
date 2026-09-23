@@ -379,22 +379,26 @@ function spawnBoss() {
 
   if (!gameRunning || waveBoss) return;
 
-  const boss = document.createElement("div");
+  const x = Math.min(
+    worldWidth - 80,
+    playerX + 400
+  );
 
-  boss.className = "enemy boss";
-  boss.innerHTML = "👿";
-
-  const x = Math.min(worldWidth - 80, playerX + 400);
   const y = playerY;
 
   const bossData = {
-    element: boss,
     x: x,
     y: y,
     hp: 50 + (wave - 1) * 25,
-speed: 0.55 + (wave - 1) * 0.02,
+    speed: 0.55 + (wave - 1) * 0.02,
+    type: "boss",
     isBoss: true
   };
+
+  enemies.push(bossData);
+
+  waveBoss = bossData;
+}
 
   boss.style.left = x + "px";
   boss.style.top = y + "px";

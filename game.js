@@ -147,9 +147,7 @@ function levelWeapon(id) {
   }
 }
 
-const upgradePool = [
-  
-  const weaponPool = [
+const weaponPool = [
   {
     id: "arcane_beam",
     name: "Magiestrahl",
@@ -157,6 +155,8 @@ const upgradePool = [
     element: "arcane"
   }
 ];
+
+const upgradePool = [
   
   {
   icon: "🔮",

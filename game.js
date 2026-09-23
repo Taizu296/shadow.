@@ -815,6 +815,8 @@ function gameOver() {
 function update() {
 
   if (!gameRunning) return;
+  
+    fireBeam();
 
   /* Smooth player movement */
 

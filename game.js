@@ -679,33 +679,6 @@ ctx.clearRect(
   visibleHeight + 200
 );
 
-/* DRAW EXP ORBS ON CANVAS */
-
-xpOrbs.forEach(orb => {
-
-  let color = "#9c4dff";
-
-  if (orb.value >= 15) {
-    color = "#ffd700";
-  } else if (orb.value >= 5) {
-    color = "#ff7043";
-  } else if (orb.value >= 2) {
-    color = "#42a5f5";
-  }
-
-  ctx.beginPath();
-  ctx.arc(
-    orb.x,
-    orb.y,
-    6,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle = color;
-  ctx.fill();
-});
-
 enemies.forEach(enemy => {
 
   let radius = 22;
@@ -745,6 +718,33 @@ enemies.forEach(enemy => {
   ctx.lineWidth = 3;
   ctx.strokeStyle = borderColor;
   ctx.stroke();
+});
+
+/* DRAW EXP ORBS ON CANVAS */
+
+xpOrbs.forEach(orb => {
+
+  let color = "#9c4dff";
+
+  if (orb.value >= 15) {
+    color = "#ffd700";
+  } else if (orb.value >= 5) {
+    color = "#ff7043";
+  } else if (orb.value >= 2) {
+    color = "#42a5f5";
+  }
+
+  ctx.beginPath();
+  ctx.arc(
+    orb.x,
+    orb.y,
+    6,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fillStyle = color;
+  ctx.fill();
 });
 
 /* DRAW PROJECTILES ON CANVAS */

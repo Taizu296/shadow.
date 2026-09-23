@@ -572,7 +572,7 @@ if (score > highscore) {
 
     wave++;
 
-    waveTime = 60;
+    waveTime = 30;
     
     startEnemySpawning();
 

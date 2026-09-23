@@ -472,6 +472,51 @@ const cameraY = Math.max(
 world.style.left = -(cameraX * zoom) + "px";
 world.style.top = -(cameraY * zoom) + "px";
 
+/* EXP ORBS */
+
+xpOrbs.forEach(orb => {
+
+  const dx = playerX - orb.x;
+  const dy = playerY - orb.y;
+
+  const distance = Math.hypot(dx, dy);
+
+  // Kugel wird in der Nähe angezogen
+  if (distance < 100 && distance > 20) {
+
+    orb.x += (dx / distance) * 6;
+    orb.y += (dy / distance) * 6;
+
+    orb.element.style.left = orb.x + "px";
+    orb.element.style.top = orb.y + "px";
+  }
+
+  // EXP einsammeln
+  if (distance <= 20) {
+
+    xp += orb.value;
+
+    orb.element.remove();
+
+    xpOrbs = xpOrbs.filter(o => o !== orb);
+
+    if (xp >= xpNeeded) {
+
+      level++;
+      xp -= xpNeeded;
+
+      xpNeeded = Math.ceil(xpNeeded * 1.4);
+
+      levelText.textContent = level;
+
+      showLevelUp();
+    }
+
+    xpFill.style.width =
+      (xp / xpNeeded * 100) + "%";
+  }
+});
+
   /* Move enemies */
 
   enemies.forEach(enemy => {

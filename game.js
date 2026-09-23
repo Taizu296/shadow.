@@ -453,7 +453,7 @@ const cameraY = Math.max(
 );
 
 world.style.transform =
-  `translate(${-cameraX}px, ${-cameraY}px)`;
+  `scale(${zoom}) translate(${-cameraX}px, ${-cameraY}px)`;
 
 /* EXP ORBS */
 

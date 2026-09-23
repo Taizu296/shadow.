@@ -354,6 +354,29 @@ const enemyData = {
   enemies.push(enemyData);
 }
 
+function startSwarm() {
+
+  const swarmInterval = setInterval(() => {
+
+    if (!gameRunning || !swarmActive || bossActive) {
+      clearInterval(swarmInterval);
+      return;
+    }
+
+    // Pro Schub mehrere Gegner erzeugen
+    for (let i = 0; i < 4; i++) {
+      spawnEnemy();
+    }
+
+  }, 500);
+
+  // Schwarm läuft 15 Sekunden
+  setTimeout(() => {
+    swarmActive = false;
+    clearInterval(swarmInterval);
+  }, 15000);
+}
+
 function spawnBoss() {
 
   if (!gameRunning || waveBoss) return;

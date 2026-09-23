@@ -100,6 +100,27 @@ let beamWidth = 12;
 let beamRange = 550;
 let lastBeamTime = 0;
 
+function getBeamTarget() {
+
+  let target = null;
+  let closestDistance = beamRange;
+
+  enemies.forEach(enemy => {
+
+    const distance = Math.hypot(
+      enemy.x - playerX,
+      enemy.y - playerY
+    );
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      target = enemy;
+    }
+  });
+
+  return target;
+}
+
 /* -------------------------
    WEAPON SYSTEM
 ------------------------- */

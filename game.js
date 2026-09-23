@@ -17,23 +17,6 @@ ctx.font = "42px Arial";
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 
-// CANVAS TEST ENEMY
-ctx.beginPath();
-ctx.arc(
-  worldWidth / 2 + 130,
-  worldHeight / 2,
-  22,
-  0,
-  Math.PI * 2
-);
-
-ctx.fillStyle = "#7a1028";
-ctx.fill();
-
-ctx.lineWidth = 3;
-ctx.strokeStyle = "#ff304f";
-ctx.stroke();
-
 const hpText = document.getElementById("hp");
 const killsText = document.getElementById("kills");
 const levelText = document.getElementById("level");
@@ -732,6 +715,54 @@ xpOrbs.forEach(orb => {
   /* Move enemies */
 
   enemies.forEach(enemy => {
+    
+/* DRAW ENEMIES ON CANVAS */
+
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+enemies.forEach(enemy => {
+
+  let radius = 22;
+  let fillColor = "#7a1028";
+  let borderColor = "#ff304f";
+
+  // Schneller Gegner
+  if (enemy.type === "bat") {
+    radius = 16;
+    fillColor = "#442080";
+    borderColor = "#a66cff";
+  }
+
+  // Tank
+  if (enemy.type === "tank") {
+    radius = 29;
+    fillColor = "#551515";
+    borderColor = "#ff704d";
+  }
+
+  // Boss
+  if (enemy.isBoss) {
+    radius = 43;
+    fillColor = "#420018";
+    borderColor = "#ff1744";
+  }
+
+  ctx.beginPath();
+  ctx.arc(
+    enemy.x,
+    enemy.y,
+    radius,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = borderColor;
+  ctx.stroke();
+});
 
     const dx = playerX - enemy.x;
     const dy = playerY - enemy.y;

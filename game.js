@@ -452,8 +452,8 @@ const cameraY = Math.max(
   )
 );
 
-world.style.left = -cameraX + "px";
-world.style.top = -cameraY + "px";
+world.style.transform =
+  `translate(${-cameraX}px, ${-cameraY}px)`;
 
 /* EXP ORBS */
 

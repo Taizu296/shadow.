@@ -62,6 +62,8 @@ if (
   if (waveTime <= 0) {
   waveTime = 0;
   waveTimerText.textContent = "BOSS";
+  
+  swarmActive = false;
   bossActive = true;
 
   spawnBoss();

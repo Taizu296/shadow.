@@ -205,6 +205,17 @@ const upgradePool = [
 },
   
   {
+  icon: "🟣",
+  name: "Magiestrahl",
+  description: "Magiestrahl auf das nächste Level verbessern",
+  weaponId: "arcane_beam",
+  type: "weapon",
+  apply: () => {
+    levelWeapon("arcane_beam");
+  }
+},
+  
+  {
     icon: "🔥",
     name: "Magische Macht",
     description: "+20% Schaden",

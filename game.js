@@ -378,6 +378,7 @@ function killEnemy(enemy) {
   kills++;
 
 killsText.textContent = kills;
+}
 
 
 /* -------------------------

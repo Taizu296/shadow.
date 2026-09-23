@@ -1,17 +1,372 @@
+const game = document.getElementById("game");
 const player = document.getElementById("player");
 
-let x = window.innerWidth / 2;
-let y = window.innerHeight / 2;
+const hpText = document.getElementById("hp");
+const killsText = document.getElementById("kills");
+const levelText = document.getElementById("level");
+const xpFill = document.getElementById("xpfill");
 
-function movePlayer(event) {
-  const touch = event.touches[0];
+let playerX = window.innerWidth / 2;
+let playerY = window.innerHeight / 2;
 
-  x = touch.clientX;
-  y = touch.clientY;
+let targetX = playerX;
+let targetY = playerY;
 
-  player.style.left = x + "px";
-  player.style.top = y + "px";
+let hp = 100;
+let kills = 0;
+
+let level = 1;
+let xp = 0;
+let xpNeeded = 5;
+
+let enemies = [];
+let projectiles = [];
+
+let gameRunning = true;
+
+player.style.left = playerX + "px";
+player.style.top = playerY + "px";
+
+
+/* -------------------------
+   TOUCH MOVEMENT
+------------------------- */
+
+function setTarget(e) {
+
+  if (!gameRunning) return;
+
+  const touch = e.touches[0];
+
+  targetX = touch.clientX;
+  targetY = touch.clientY;
 }
 
-document.addEventListener("touchmove", movePlayer);
-document.addEventListener("touchstart", movePlayer);
+document.addEventListener(
+  "touchstart",
+  setTarget,
+  { passive: false }
+);
+
+document.addEventListener(
+  "touchmove",
+  setTarget,
+  { passive: false }
+);
+
+
+/* -------------------------
+   SPAWN ENEMY
+------------------------- */
+
+function spawnEnemy() {
+
+  if (!gameRunning) return;
+
+  const enemy = document.createElement("div");
+
+  enemy.className = "enemy";
+  enemy.innerHTML = "👹";
+
+  let x;
+  let y;
+
+  const side = Math.floor(Math.random() * 4);
+
+  if (side === 0) {
+    x = Math.random() * window.innerWidth;
+    y = -40;
+  }
+
+  if (side === 1) {
+    x = window.innerWidth + 40;
+    y = Math.random() * window.innerHeight;
+  }
+
+  if (side === 2) {
+    x = Math.random() * window.innerWidth;
+    y = window.innerHeight + 40;
+  }
+
+  if (side === 3) {
+    x = -40;
+    y = Math.random() * window.innerHeight;
+  }
+
+  const enemyData = {
+    element: enemy,
+    x: x,
+    y: y,
+    hp: 2,
+    speed: 0.65 + Math.random() * 0.35
+  };
+
+  enemy.style.left = x + "px";
+  enemy.style.top = y + "px";
+
+  game.appendChild(enemy);
+  enemies.push(enemyData);
+}
+
+
+/* -------------------------
+   FIND CLOSEST ENEMY
+------------------------- */
+
+function closestEnemy() {
+
+  let closest = null;
+  let closestDistance = Infinity;
+
+  enemies.forEach(enemy => {
+
+    const dx = enemy.x - playerX;
+    const dy = enemy.y - playerY;
+
+    const distance = Math.hypot(dx, dy);
+
+    if (distance < closestDistance) {
+
+      closestDistance = distance;
+      closest = enemy;
+    }
+  });
+
+  return closest;
+}
+
+
+/* -------------------------
+   SHOOT MAGIC
+------------------------- */
+
+function shoot() {
+
+  if (!gameRunning) return;
+
+  const enemy = closestEnemy();
+
+  if (!enemy) return;
+
+  const projectile = document.createElement("div");
+
+  projectile.className = "projectile";
+
+  game.appendChild(projectile);
+
+  const dx = enemy.x - playerX;
+  const dy = enemy.y - playerY;
+
+  const distance = Math.hypot(dx, dy);
+
+  const speed = 7;
+
+  const projectileData = {
+
+    element: projectile,
+
+    x: playerX,
+    y: playerY,
+
+    vx: (dx / distance) * speed,
+    vy: (dy / distance) * speed
+  };
+
+  projectile.style.left = playerX + "px";
+  projectile.style.top = playerY + "px";
+
+  projectiles.push(projectileData);
+}
+
+
+/* -------------------------
+   KILL ENEMY
+------------------------- */
+
+function killEnemy(enemy) {
+
+  enemy.element.remove();
+
+  enemies = enemies.filter(e => e !== enemy);
+
+  kills++;
+  xp++;
+
+  killsText.textContent = kills;
+
+  if (xp >= xpNeeded) {
+
+    level++;
+
+    xp = 0;
+
+    xpNeeded = Math.ceil(xpNeeded * 1.4);
+
+    levelText.textContent = level;
+  }
+
+  xpFill.style.width =
+    (xp / xpNeeded * 100) + "%";
+}
+
+
+/* -------------------------
+   GAME OVER
+------------------------- */
+
+function gameOver() {
+
+  gameRunning = false;
+
+  document.getElementById("finalKills")
+    .textContent = kills;
+
+  document.getElementById("gameOver")
+    .style.display = "flex";
+}
+
+
+/* -------------------------
+   GAME LOOP
+------------------------- */
+
+function update() {
+
+  if (!gameRunning) return;
+
+  /* Smooth player movement */
+
+  const pdx = targetX - playerX;
+  const pdy = targetY - playerY;
+
+  const playerDistance = Math.hypot(pdx, pdy);
+
+  if (playerDistance > 3) {
+
+    playerX += pdx * 0.08;
+    playerY += pdy * 0.08;
+  }
+
+  playerX = Math.max(
+    30,
+    Math.min(window.innerWidth - 30, playerX)
+  );
+
+  playerY = Math.max(
+    100,
+    Math.min(window.innerHeight - 30, playerY)
+  );
+
+  player.style.left = playerX + "px";
+  player.style.top = playerY + "px";
+
+
+  /* Move enemies */
+
+  enemies.forEach(enemy => {
+
+    const dx = playerX - enemy.x;
+    const dy = playerY - enemy.y;
+
+    const distance = Math.hypot(dx, dy);
+
+    enemy.x +=
+      (dx / distance) * enemy.speed;
+
+    enemy.y +=
+      (dy / distance) * enemy.speed;
+
+    enemy.element.style.left =
+      enemy.x + "px";
+
+    enemy.element.style.top =
+      enemy.y + "px";
+
+
+    /* Enemy hits player */
+
+    if (distance < 38) {
+
+      hp -= 0.15;
+
+      hpText.textContent =
+        Math.max(0, Math.ceil(hp));
+
+      if (hp <= 0) {
+        gameOver();
+      }
+    }
+  });
+
+
+  /* Move projectiles */
+
+  projectiles.forEach(projectile => {
+
+    projectile.x += projectile.vx;
+    projectile.y += projectile.vy;
+
+    projectile.element.style.left =
+      projectile.x + "px";
+
+    projectile.element.style.top =
+      projectile.y + "px";
+
+
+    /* Collision */
+
+    enemies.forEach(enemy => {
+
+      const distance = Math.hypot(
+        projectile.x - enemy.x,
+        projectile.y - enemy.y
+      );
+
+      if (distance < 28) {
+
+        enemy.hp--;
+
+        projectile.element.remove();
+
+        projectiles =
+          projectiles.filter(
+            p => p !== projectile
+          );
+
+        if (enemy.hp <= 0) {
+          killEnemy(enemy);
+        }
+      }
+    });
+
+
+    /* Remove projectile outside screen */
+
+    if (
+      projectile.x < -50 ||
+      projectile.x > window.innerWidth + 50 ||
+      projectile.y < -50 ||
+      projectile.y > window.innerHeight + 50
+    ) {
+
+      projectile.element.remove();
+
+      projectiles =
+        projectiles.filter(
+          p => p !== projectile
+        );
+    }
+  });
+
+  requestAnimationFrame(update);
+}
+
+
+/* -------------------------
+   START
+------------------------- */
+
+setInterval(spawnEnemy, 1100);
+setInterval(shoot, 650);
+
+update();

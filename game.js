@@ -17,13 +17,22 @@ ctx.font = "42px Arial";
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 
-ctx.fillStyle = "red";
-ctx.fillRect(
-  worldWidth / 2 + 80,
-  worldHeight / 2 - 50,
-  100,
-  100
+// CANVAS TEST ENEMY
+ctx.beginPath();
+ctx.arc(
+  worldWidth / 2 + 130,
+  worldHeight / 2,
+  22,
+  0,
+  Math.PI * 2
 );
+
+ctx.fillStyle = "#7a1028";
+ctx.fill();
+
+ctx.lineWidth = 3;
+ctx.strokeStyle = "#ff304f";
+ctx.stroke();
 
 const hpText = document.getElementById("hp");
 const killsText = document.getElementById("kills");

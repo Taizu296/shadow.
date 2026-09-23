@@ -321,7 +321,7 @@ x = Math.max(30, Math.min(worldWidth - 30, x));
 y = Math.max(30, Math.min(worldHeight - 30, y));
 
   const baseHp =
-  2 + Math.floor((wave - 1) / 2);
+  3 + Math.floor((wave - 1) * 0.75);
 
 let enemyHp = baseHp;
 

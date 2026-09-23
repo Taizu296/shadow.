@@ -312,12 +312,19 @@ x = Math.max(30, Math.min(worldWidth - 30, x));
 y = Math.max(30, Math.min(worldHeight - 30, y));
 
   const enemyData = {
-    element: enemy,
-    x: x,
-    y: y,
-    hp: 2,
-    speed: 0.65 + Math.random() * 0.35
-  };
+  element: enemy,
+  x: x,
+  y: y,
+
+  // Alle 2 Wellen +1 HP
+  hp: 2 + Math.floor((wave - 1) / 2),
+
+  // Gegner werden langsam schneller
+  speed:
+    0.65 +
+    Math.random() * 0.35 +
+    (wave - 1) * 0.025
+};
 
   enemy.style.left = x + "px";
   enemy.style.top = y + "px";

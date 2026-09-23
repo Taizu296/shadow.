@@ -369,3 +369,37 @@ transition: opacity 0.2s ease;
   font-size: 13px;
   color: #bbb;
 }
+
+/* EXP ORBS */
+
+.xpOrb {
+  position: absolute;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  background: #8b5cff;
+
+  box-shadow:
+    0 0 6px #ffffff,
+    0 0 12px #9c67ff,
+    0 0 22px #713cff;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 12;
+
+  animation: xpPulse 0.8s infinite alternate;
+}
+
+@keyframes xpPulse {
+  from {
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}

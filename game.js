@@ -395,8 +395,8 @@ function spawnBoss() {
     element: boss,
     x: x,
     y: y,
-    hp: 30 + (wave - 1) * 10,
-    speed: 0.45,
+    hp: 50 + (wave - 1) * 25,
+speed: 0.55 + (wave - 1) * 0.02,
     isBoss: true
   };
 

@@ -144,10 +144,8 @@ function levelWeapon(id) {
       damage *= 1.4;
       projectileSize *= 1.3;
     }
-  }
-}
 
-if (id === "arcane_beam") {
+  if (id === "arcane_beam") {
 
   if (weapon.level === 2) {
     // später: +25% Strahlschaden

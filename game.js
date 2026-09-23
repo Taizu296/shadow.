@@ -435,7 +435,22 @@ function killEnemy(enemy) {
 
   kills++;
 
-killsText.textContent = kills;
+  killsText.textContent = kills;
+
+  /* Boss besiegt */
+
+  if (enemy.isBoss) {
+
+    waveBoss = null;
+    bossActive = false;
+
+    wave++;
+
+    waveTime = 60;
+
+    waveText.textContent = wave;
+    waveTimerText.textContent = waveTime;
+  }
 }
 
 

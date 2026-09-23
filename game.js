@@ -992,7 +992,7 @@ if (activeBeam) {
   const beamAge =
     performance.now() - activeBeam.createdAt;
 
-  if (beamAge < 180) {
+  if (beamAge < 700) {
 
     ctx.beginPath();
 

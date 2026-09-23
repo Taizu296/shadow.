@@ -173,14 +173,18 @@ body {
   z-index: 10;
 }
 
-.boss {
-  font-size: 64px;
-  z-index: 20;
+.enemy.tank {
+  font-size: 48px;
+  width: 58px;
+  height: 58px;
+  z-index: 15;
 }
 
-.tank {
-  font-size: 46px;
-  z-index: 15;
+.enemy.boss {
+  font-size: 72px;
+  width: 86px;
+  height: 86px;
+  z-index: 20;
 }
 
 /* MAGIC PROJECTILE */

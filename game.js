@@ -798,13 +798,6 @@ enemies.forEach(enemy => {
     projectile.x += projectile.vx;
     projectile.y += projectile.vy;
 
-    projectile.element.style.left =
-      projectile.x + "px";
-
-    projectile.element.style.top =
-      projectile.y + "px";
-
-
     /* Collision */
 
     enemies.forEach(enemy => {

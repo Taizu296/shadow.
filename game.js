@@ -265,16 +265,12 @@ function update() {
 
   /* Smooth player movement */
 
-  const pdx = targetX - playerX;
-  const pdy = targetY - playerY;
+  /* Joystick player movement */
 
-  const playerDistance = Math.hypot(pdx, pdy);
+const playerSpeed = 4.5;
 
-  if (playerDistance > 3) {
-
-    playerX += pdx * 0.08;
-    playerY += pdy * 0.08;
-  }
+playerX += moveX * playerSpeed;
+playerY += moveY * playerSpeed;
 
   playerX = Math.max(
     30,

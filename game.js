@@ -670,6 +670,15 @@ xpOrbs.forEach(orb => {
   }
 });
 
+/* DRAW ENEMIES ON CANVAS */
+
+ctx.clearRect(
+  cameraX - 100,
+  cameraY - 100,
+  visibleWidth + 200,
+  visibleHeight + 200
+);
+
 /* DRAW EXP ORBS ON CANVAS */
 
 xpOrbs.forEach(orb => {
@@ -696,15 +705,6 @@ xpOrbs.forEach(orb => {
   ctx.fillStyle = color;
   ctx.fill();
 });
-
-/* DRAW ENEMIES ON CANVAS */
-
-ctx.clearRect(
-  cameraX - 100,
-  cameraY - 100,
-  visibleWidth + 200,
-  visibleHeight + 200
-);
 
 enemies.forEach(enemy => {
 

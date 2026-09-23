@@ -985,6 +985,37 @@ xpOrbs.forEach(orb => {
   ctx.fill();
 });
 
+/* DRAW ARCANE BEAM */
+
+if (activeBeam) {
+
+  const beamAge =
+    performance.now() - activeBeam.createdAt;
+
+  if (beamAge < 180) {
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      activeBeam.startX,
+      activeBeam.startY
+    );
+
+    ctx.lineTo(
+      activeBeam.endX,
+      activeBeam.endY
+    );
+
+    ctx.lineWidth = beamWidth;
+    ctx.strokeStyle = "#c266ff";
+    ctx.lineCap = "round";
+    ctx.stroke();
+
+  } else {
+    activeBeam = null;
+  }
+}
+
 /* DRAW PROJECTILES ON CANVAS */
 
 projectiles.forEach(projectile => {

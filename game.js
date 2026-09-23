@@ -122,6 +122,37 @@ function getBeamTarget() {
   return target;
 }
 
+function fireBeam() {
+
+  if (!getWeapon("arcane_beam")) return;
+
+  const now = performance.now();
+
+  if (now - lastBeamTime < beamCooldown) {
+    return;
+  }
+
+  const target = getBeamTarget();
+
+  if (!target) return;
+
+  lastBeamTime = now;
+
+  target.hp -= beamDamage;
+
+  activeBeam = {
+    startX: playerX,
+    startY: playerY,
+    endX: target.x,
+    endY: target.y,
+    createdAt: now
+  };
+
+  if (target.hp <= 0) {
+    killEnemy(target);
+  }
+}
+
 /* -------------------------
    WEAPON SYSTEM
 ------------------------- */

@@ -317,7 +317,7 @@ let enemySpeed =
 
 if (enemyType === "bat") {
   enemyHp = Math.max(1, baseHp - 1);
-  enemySpeed *= 1.6;
+  enemySpeed *= 4.6;
 }
 
 if (enemyType === "tank") {

@@ -17,10 +17,12 @@ ctx.font = "42px Arial";
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 
-ctx.fillText(
-  "👹",
-  worldWidth / 2 + 150,
-  worldHeight / 2
+ctx.fillStyle = "red";
+ctx.fillRect(
+  worldWidth / 2 + 80,
+  worldHeight / 2 - 50,
+  100,
+  100
 );
 
 const hpText = document.getElementById("hp");

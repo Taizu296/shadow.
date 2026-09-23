@@ -17,8 +17,6 @@ const waveTimerText = document.getElementById("waveTimer");
 const scoreText = document.getElementById("score");
 const highscoreText = document.getElementById("highscore");
 
-highscoreText.textContent = highscore;
-
 let playerX = worldWidth / 2;
 let playerY = worldHeight / 2;
 
@@ -27,6 +25,8 @@ let kills = 0;
 
 let score = 0;
 let highscore = Number(localStorage.getItem("shadowHighscore")) || 0;
+
+highscoreText.textContent = highscore;
 
 let level = 1;
 let xp = 0;

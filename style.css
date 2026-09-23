@@ -53,6 +53,18 @@ body {
   transform-origin: 0 0;
 }
 
+#gameCanvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 3000px;
+  height: 5000px;
+
+  pointer-events: none;
+  z-index: 5;
+}
+
 /* HUD */
 
 #hud {

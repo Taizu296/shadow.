@@ -156,6 +156,30 @@ const weaponPool = [
   }
 ];
 
+function addWeapon(id) {
+
+  if (activeWeapons.length >= maxActiveWeapons) {
+    return;
+  }
+
+  if (getWeapon(id)) {
+    return;
+  }
+
+  const weaponData = weaponPool.find(
+    weapon => weapon.id === id
+  );
+
+  if (!weaponData) return;
+
+  activeWeapons.push({
+    id: weaponData.id,
+    name: weaponData.name,
+    element: weaponData.element,
+    level: 1
+  });
+}
+
 const upgradePool = [
   
   {

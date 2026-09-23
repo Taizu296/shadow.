@@ -247,6 +247,15 @@ function spawnEnemy() {
   enemy.className = "enemy";
   enemy.innerHTML = "👹";
 
+let enemyType = "demon";
+
+// Ab Welle 3 besteht eine Chance auf schnelle Gegner
+if (wave >= 3 && Math.random() < 0.25) {
+  enemyType = "bat";
+  enemy.innerHTML = "🦇";
+  enemy.classList.add("bat");
+}
+
   let x;
 let y;
 

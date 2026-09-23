@@ -446,14 +446,6 @@ function shoot() {
 
   for (let i = 0; i < multishot; i++) {
 
-    const projectile = document.createElement("div");
-    projectile.className = "projectile";
-
-    projectile.style.width = projectileSize + "px";
-    projectile.style.height = projectileSize + "px";
-
-    world.appendChild(projectile);
-
     const offset =
       (i - (multishot - 1) / 2) * spread;
 

@@ -320,19 +320,28 @@ function spawnBoss() {
 x = Math.max(30, Math.min(worldWidth - 30, x));
 y = Math.max(30, Math.min(worldHeight - 30, y));
 
-  const enemyData = {
+  const baseHp =
+  2 + Math.floor((wave - 1) / 2);
+
+let enemyHp = baseHp;
+
+let enemySpeed =
+  0.65 +
+  Math.random() * 0.35 +
+  (wave - 1) * 0.025;
+
+if (enemyType === "bat") {
+  enemyHp = Math.max(1, baseHp - 1);
+  enemySpeed *= 1.6;
+}
+
+const enemyData = {
   element: enemy,
   x: x,
   y: y,
-
-  // Alle 2 Wellen +1 HP
-  hp: 2 + Math.floor((wave - 1) / 2),
-
-  // Gegner werden langsam schneller
-  speed:
-    0.65 +
-    Math.random() * 0.35 +
-    (wave - 1) * 0.025
+  hp: enemyHp,
+  speed: enemySpeed,
+  type: enemyType
 };
 
   enemy.style.left = x + "px";

@@ -39,10 +39,12 @@ setInterval(() => {
   waveTimerText.textContent = waveTime;
 
   if (waveTime <= 0) {
-    waveTime = 0;
-    waveTimerText.textContent = "BOSS";
-    bossActive = true;
-  }
+  waveTime = 0;
+  waveTimerText.textContent = "BOSS";
+  bossActive = true;
+
+  spawnBoss();
+}
 
 }, 1000);
 

@@ -1,12 +1,17 @@
 * {
   box-sizing: border-box;
   touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
+html,
 body {
   margin: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  background: #050509;
+  background: #030305;
   font-family: Arial, sans-serif;
   color: white;
 }
@@ -14,37 +19,194 @@ body {
 #game {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
+
   background:
-    radial-gradient(circle at center, #25203a 0%, #0d0b16 55%, #030305 100%);
+    radial-gradient(
+      circle at center,
+      #29213e 0%,
+      #110d1d 45%,
+      #050508 100%
+    );
 }
+
+/* HUD */
 
 #hud {
   position: absolute;
-  top: 45px;
+  top: max(25px, env(safe-area-inset-top));
   left: 20px;
-  z-index: 10;
+  right: 20px;
+  z-index: 100;
+  pointer-events: none;
 }
 
-#hud h1 {
-  margin: 0 0 10px;
-  font-size: 20px;
+.title {
+  font-weight: 900;
   letter-spacing: 3px;
+  font-size: 18px;
+  margin-bottom: 8px;
 }
+
+.stats {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.level {
+  font-size: 12px;
+  color: #c6b4ff;
+  margin-bottom: 5px;
+}
+
+.xpbar {
+  width: 180px;
+  height: 7px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,.15);
+}
+
+#xpfill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #6336ff,
+    #b46cff
+  );
+}
+
+/* PLAYER */
 
 #player {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 55px;
-  height: 55px;
+  width: 58px;
+  height: 58px;
+  z-index: 20;
   transform: translate(-50%, -50%);
+}
+
+.mage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
   display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 40px;
+
+  filter:
+    drop-shadow(0 0 8px #a36cff)
+    drop-shadow(0 0 18px #713cff);
+}
+
+.playerAura {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+
+  background: rgba(115,60,255,.2);
+
+  box-shadow:
+    0 0 20px #713cff,
+    0 0 45px rgba(113,60,255,.45);
+
+  animation: aura 1.2s infinite alternate;
+}
+
+@keyframes aura {
+  from {
+    transform: scale(.9);
+    opacity: .5;
+  }
+
+  to {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* ENEMIES */
+
+.enemy {
+  position: absolute;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 34px;
+
+  transform: translate(-50%, -50%);
+
+  filter: drop-shadow(0 0 10px #ff304f);
+
+  z-index: 10;
+}
+
+/* MAGIC PROJECTILE */
+
+.projectile {
+  position: absolute;
+
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  background: #d5c2ff;
+
+  box-shadow:
+    0 0 8px #ffffff,
+    0 0 15px #9c67ff,
+    0 0 30px #713cff;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 15;
+}
+
+/* GAME OVER */
+
+#gameOver {
+  display: none;
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 1000;
+
+  background: rgba(0,0,0,.85);
+
   align-items: center;
   justify-content: center;
-  font-size: 42px;
-  border-radius: 50%;
-  background: rgba(120, 60, 255, 0.25);
-  box-shadow: 0 0 30px #713cff;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+#gameOver h1 {
+  letter-spacing: 5px;
+}
+
+#gameOver button {
+  margin-top: 15px;
+
+  border: 0;
+  border-radius: 12px;
+
+  padding: 15px 28px;
+
+  background: #713cff;
+  color: white;
+
+  font-weight: bold;
+  font-size: 16px;
 }

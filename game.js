@@ -344,7 +344,7 @@ function shoot() {
     projectile.style.width = projectileSize + "px";
     projectile.style.height = projectileSize + "px";
 
-    game.appendChild(projectile);
+    world.appendChild(projectile);
 
     const offset =
       (i - (multishot - 1) / 2) * spread;

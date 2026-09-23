@@ -21,6 +21,10 @@ let level = 1;
 let xp = 0;
 let xpNeeded = 5;
 
+let wave = 1;
+let waveKills = 0;
+let killsNeededForNextWave = 10;
+
 let enemies = [];
 let projectiles = [];
 let xpOrbs = [];

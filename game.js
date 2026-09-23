@@ -22,8 +22,9 @@ let xp = 0;
 let xpNeeded = 5;
 
 let wave = 1;
-let waveKills = 0;
-let killsNeededForNextWave = 10;
+let waveTime = 60;
+let bossActive = false;
+let waveBoss = null;
 
 let enemies = [];
 let projectiles = [];

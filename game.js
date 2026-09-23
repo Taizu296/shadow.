@@ -708,7 +708,12 @@ xpOrbs.forEach(orb => {
 
 /* DRAW ENEMIES ON CANVAS */
 
-ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.clearRect(
+  cameraX - 100,
+  cameraY - 100,
+  visibleWidth + 200,
+  visibleHeight + 200
+);
 
 enemies.forEach(enemy => {
 

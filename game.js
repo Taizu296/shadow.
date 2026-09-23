@@ -823,9 +823,9 @@ function startEnemySpawning() {
 
   // Jede Welle spawnen Gegner schneller
   const spawnRate = Math.max(
-    350,
-    1100 - (wave - 1) * 70
-  );
+  180,
+  600 - (wave - 1) * 35
+);
 
   enemySpawnInterval = setInterval(
     spawnEnemy,

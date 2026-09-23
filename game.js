@@ -452,8 +452,8 @@ const cameraY = Math.max(
   )
 );
 
-world.style.left = -(cameraX * zoom) + "px";
-world.style.top = -(cameraY * zoom) + "px";
+world.style.left = -cameraX + "px";
+world.style.top = -cameraY + "px";
 
 /* EXP ORBS */
 

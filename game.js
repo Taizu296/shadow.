@@ -148,6 +148,18 @@ function levelWeapon(id) {
 }
 
 const upgradePool = [
+  
+  {
+  icon: "🔮",
+  name: "Magiekugeln",
+  description: "Magiekugeln auf das nächste Level verbessern",
+  weaponId: "arcane_orb",
+  type: "weapon",
+  apply: () => {
+    levelWeapon("arcane_orb");
+  }
+},
+  
   {
     icon: "🔥",
     name: "Magische Macht",

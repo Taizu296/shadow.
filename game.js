@@ -157,6 +157,8 @@ let moveY = 0;
 
 function moveJoystick(e) {
   e.preventDefault();
+  
+  joystick.style.opacity = "0.15";
 
   const touch = e.touches[0];
   const rect = joystick.getBoundingClientRect();
@@ -183,6 +185,7 @@ function moveJoystick(e) {
 }
 
 function stopJoystick() {
+  joystick.style.opacity = "0.45";
   moveX = 0;
   moveY = 0;
 

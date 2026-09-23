@@ -95,6 +95,21 @@ let projectileSpeed = 7;
 let projectileSize = 13;
 let multishot = 1;
 
+/* -------------------------
+   WEAPON SYSTEM
+------------------------- */
+
+const maxActiveWeapons = 3;
+
+let activeWeapons = [
+  {
+    id: "arcane_orb",
+    name: "Magiekugeln",
+    element: "arcane",
+    level: 1
+  }
+];
+
 const upgradePool = [
   {
     icon: "🔥",

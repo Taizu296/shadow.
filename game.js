@@ -36,6 +36,7 @@ let wave = 1;
 let waveTime = 60;
 let bossActive = false;
 let waveBoss = null;
+let swarmActive = false;
 
 setInterval(() => {
 
@@ -45,6 +46,18 @@ setInterval(() => {
   waveTime--;
 
   waveTimerText.textContent = waveTime;
+
+/* SCHWARM-EVENT */
+
+/* Jede zweite Welle bei 15 Sekunden Restzeit */
+if (
+  wave % 2 === 0 &&
+  waveTime === 15 &&
+  !swarmActive
+) {
+  swarmActive = true;
+  startSwarm();
+}
 
   if (waveTime <= 0) {
   waveTime = 0;

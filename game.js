@@ -110,6 +110,43 @@ let activeWeapons = [
   }
 ];
 
+function getWeapon(id) {
+  return activeWeapons.find(
+    weapon => weapon.id === id
+  );
+}
+
+function levelWeapon(id) {
+
+  const weapon = getWeapon(id);
+
+  if (!weapon) return;
+  if (weapon.level >= 5) return;
+
+  weapon.level++;
+
+  if (id === "arcane_orb") {
+
+    if (weapon.level === 2) {
+      damage *= 1.25;
+    }
+
+    if (weapon.level === 3) {
+      multishot += 1;
+    }
+
+    if (weapon.level === 4) {
+      attackSpeed *= 0.8;
+      restartShooting();
+    }
+
+    if (weapon.level === 5) {
+      damage *= 1.4;
+      projectileSize *= 1.3;
+    }
+  }
+}
+
 const upgradePool = [
   {
     icon: "🔥",

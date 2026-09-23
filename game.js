@@ -24,6 +24,123 @@ let projectiles = [];
 
 let gameRunning = true;
 
+let damage = 1;
+let attackSpeed = 650;
+let playerSpeed = 4.5;
+let projectileSpeed = 7;
+let projectileSize = 13;
+let multishot = 1;
+
+const upgradePool = [
+  {
+    icon: "🔥",
+    name: "Magische Macht",
+    description: "+20% Schaden",
+    apply: () => {
+      damage *= 1.2;
+    }
+  },
+
+  {
+    icon: "⚡",
+    name: "Schneller Zaubern",
+    description: "+15% Angriffsgeschwindigkeit",
+    apply: () => {
+      attackSpeed *= 0.85;
+      restartShooting();
+    }
+  },
+
+  {
+    icon: "🏃",
+    name: "Beweglichkeit",
+    description: "+12% Bewegungsgeschwindigkeit",
+    apply: () => {
+      playerSpeed *= 1.12;
+    }
+  },
+
+  {
+    icon: "🚀",
+    name: "Arkane Beschleunigung",
+    description: "+20% Projektilgeschwindigkeit",
+    apply: () => {
+      projectileSpeed *= 1.2;
+    }
+  },
+
+  {
+    icon: "💥",
+    name: "Große Magie",
+    description: "+20% Projektilgröße",
+    apply: () => {
+      projectileSize *= 1.2;
+    }
+  },
+
+  {
+    icon: "🌀",
+    name: "Multishot",
+    description: "+1 Projektil pro Angriff",
+    apply: () => {
+      multishot += 1;
+    }
+  }
+];
+
+function showLevelUp() {
+
+  gameRunning = false;
+
+  const levelUpScreen =
+    document.getElementById("levelUp");
+
+  const choices =
+    document.getElementById("upgradeChoices");
+
+  choices.innerHTML = "";
+
+  // Pool mischen und 3 unterschiedliche Upgrades nehmen
+  const randomUpgrades = [...upgradePool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+
+  randomUpgrades.forEach(upgrade => {
+
+    const card = document.createElement("div");
+    card.className = "upgradeCard";
+
+    card.innerHTML = `
+      <div class="upgradeIcon">${upgrade.icon}</div>
+
+      <div>
+        <div class="upgradeName">
+          ${upgrade.name}
+        </div>
+
+        <div class="upgradeDescription">
+          ${upgrade.description}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+
+      upgrade.apply();
+
+      levelUpScreen.style.display = "none";
+
+      gameRunning = true;
+
+      update();
+    });
+
+    choices.appendChild(card);
+  });
+
+  levelUpScreen.style.display = "flex";
+}
+
 player.style.left = playerX + "px";
 player.style.top = playerY + "px";
 
@@ -174,37 +291,46 @@ function shoot() {
   if (!gameRunning) return;
 
   const enemy = closestEnemy();
-
   if (!enemy) return;
-
-  const projectile = document.createElement("div");
-
-  projectile.className = "projectile";
-
-  game.appendChild(projectile);
 
   const dx = enemy.x - playerX;
   const dy = enemy.y - playerY;
 
-  const distance = Math.hypot(dx, dy);
+  const baseAngle = Math.atan2(dy, dx);
 
-  const speed = 7;
+  // Mehrere Projektile leicht auffächern
+  const spread = 0.18;
 
-  const projectileData = {
+  for (let i = 0; i < multishot; i++) {
 
-    element: projectile,
+    const projectile = document.createElement("div");
+    projectile.className = "projectile";
 
-    x: playerX,
-    y: playerY,
+    projectile.style.width = projectileSize + "px";
+    projectile.style.height = projectileSize + "px";
 
-    vx: (dx / distance) * speed,
-    vy: (dy / distance) * speed
-  };
+    game.appendChild(projectile);
 
-  projectile.style.left = playerX + "px";
-  projectile.style.top = playerY + "px";
+    const offset =
+      (i - (multishot - 1) / 2) * spread;
 
-  projectiles.push(projectileData);
+    const angle = baseAngle + offset;
+
+    const projectileData = {
+      element: projectile,
+
+      x: playerX,
+      y: playerY,
+
+      vx: Math.cos(angle) * projectileSpeed,
+      vy: Math.sin(angle) * projectileSpeed
+    };
+
+    projectile.style.left = playerX + "px";
+    projectile.style.top = playerY + "px";
+
+    projectiles.push(projectileData);
+  }
 }
 
 
@@ -225,14 +351,16 @@ function killEnemy(enemy) {
 
   if (xp >= xpNeeded) {
 
-    level++;
+  level++;
 
-    xp = 0;
+  xp = 0;
 
-    xpNeeded = Math.ceil(xpNeeded * 1.4);
+  xpNeeded = Math.ceil(xpNeeded * 1.4);
 
-    levelText.textContent = level;
-  }
+  levelText.textContent = level;
+
+  showLevelUp();
+}
 
   xpFill.style.width =
     (xp / xpNeeded * 100) + "%";
@@ -266,8 +394,6 @@ function update() {
   /* Smooth player movement */
 
   /* Joystick player movement */
-
-const playerSpeed = 4.5;
 
 playerX += moveX * playerSpeed;
 playerY += moveY * playerSpeed;
@@ -349,7 +475,7 @@ playerY += moveY * playerSpeed;
 
       if (distance < 28) {
 
-        enemy.hp--;
+        enemy.hp -= damage;
 
         projectile.element.remove();
 
@@ -392,6 +518,12 @@ playerY += moveY * playerSpeed;
 ------------------------- */
 
 setInterval(spawnEnemy, 1100);
-setInterval(shoot, 650);
+
+let shootInterval = setInterval(shoot, attackSpeed);
+
+function restartShooting() {
+  clearInterval(shootInterval);
+  shootInterval = setInterval(shoot, attackSpeed);
+}
 
 update();

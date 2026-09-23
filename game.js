@@ -194,6 +194,17 @@ const upgradePool = [
 },
   
   {
+  icon: "🟣",
+  name: "Magiestrahl",
+  description: "Neue Waffe: Feuert einen arkanen Strahl auf Gegner",
+  weaponId: "arcane_beam",
+  type: "newWeapon",
+  apply: () => {
+    addWeapon("arcane_beam");
+  }
+},
+  
+  {
     icon: "🔥",
     name: "Magische Macht",
     description: "+20% Schaden",

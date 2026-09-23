@@ -736,7 +736,21 @@ xpOrbs.forEach(orb => {
 
     if (distance < 38) {
 
-      hp -= 0.15;
+      let contactDamage = 0.15;
+
+if (enemy.type === "bat") {
+  contactDamage = 0.08;
+}
+
+if (enemy.type === "tank") {
+  contactDamage = 0.35;
+}
+
+if (enemy.isBoss) {
+  contactDamage = 0.6;
+}
+
+hp -= contactDamage;
 
       hpText.textContent =
         Math.max(0, Math.ceil(hp));

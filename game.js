@@ -9,6 +9,17 @@ const ctx = canvas.getContext("2d");
 canvas.width = 3000;
 canvas.height = 5000;
 
+// CANVAS TEST
+ctx.font = "42px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+
+ctx.fillText(
+  "👹",
+  worldWidth / 2 + 150,
+  worldHeight / 2
+);
+
 const worldWidth = 3000;
 const worldHeight = 5000;
 

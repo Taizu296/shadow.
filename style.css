@@ -408,6 +408,30 @@ transition: opacity 0.2s ease;
   animation: xpPulse 0.8s infinite alternate;
 }
 
+.xpOrb.xpMedium {
+  background: #39a8ff;
+  box-shadow:
+    0 0 6px #ffffff,
+    0 0 12px #39a8ff,
+    0 0 22px #1677ff;
+}
+
+.xpOrb.xpLarge {
+  background: #ff6439;
+  box-shadow:
+    0 0 6px #ffffff,
+    0 0 12px #ff6439,
+    0 0 22px #ff2f16;
+}
+
+.xpOrb.xpBoss {
+  background: #ffd84a;
+  box-shadow:
+    0 0 6px #ffffff,
+    0 0 12px #ffd84a,
+    0 0 24px #ff9d00;
+}
+
 @keyframes xpPulse {
   from {
     transform: translate(-50%, -50%) scale(0.85);

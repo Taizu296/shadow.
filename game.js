@@ -644,17 +644,12 @@ xpOrbs.forEach(orb => {
 
     orb.x += (dx / distance) * 6;
     orb.y += (dy / distance) * 6;
-
-    orb.element.style.left = orb.x + "px";
-    orb.element.style.top = orb.y + "px";
   }
 
   // EXP einsammeln
   if (distance <= 20) {
 
     xp += orb.value;
-
-    orb.element.remove();
 
     xpOrbs = xpOrbs.filter(o => o !== orb);
 

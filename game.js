@@ -14,6 +14,11 @@ const xpFill = document.getElementById("xpfill");
 const waveText = document.getElementById("wave");
 const waveTimerText = document.getElementById("waveTimer");
 
+const scoreText = document.getElementById("score");
+const highscoreText = document.getElementById("highscore");
+
+highscoreText.textContent = highscore;
+
 let playerX = worldWidth / 2;
 let playerY = worldHeight / 2;
 

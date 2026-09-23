@@ -149,6 +149,15 @@ function levelWeapon(id) {
 
 const upgradePool = [
   
+  const weaponPool = [
+  {
+    id: "arcane_beam",
+    name: "Magiestrahl",
+    icon: "🟣",
+    element: "arcane"
+  }
+];
+  
   {
   icon: "🔮",
   name: "Magiekugeln",
@@ -159,15 +168,6 @@ const upgradePool = [
     levelWeapon("arcane_orb");
   }
 },
-  
-const weaponPool = [
-  {
-    id: "arcane_beam",
-    name: "Magiestrahl",
-    icon: "🟣",
-    element: "arcane"
-  }
-];
   
   {
     icon: "🔥",

@@ -268,7 +268,7 @@ if (upgrade.type === "weapon") {
 
       <div>
         <div class="upgradeName">
-          ${upgrade.name}
+          ${displayName}
         </div>
 
         <div class="upgradeDescription">

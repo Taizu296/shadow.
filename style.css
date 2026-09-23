@@ -154,6 +154,11 @@ body {
 
 /* ENEMIES */
 
+.boss {
+  font-size: 64px;
+  z-index: 20;
+}
+
 .enemy {
   position: absolute;
 

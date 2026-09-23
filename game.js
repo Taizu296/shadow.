@@ -29,6 +29,23 @@ let waveTime = 60;
 let bossActive = false;
 let waveBoss = null;
 
+setInterval(() => {
+
+  if (!gameRunning) return;
+  if (bossActive) return;
+
+  waveTime--;
+
+  waveTimerText.textContent = waveTime;
+
+  if (waveTime <= 0) {
+    waveTime = 0;
+    waveTimerText.textContent = "BOSS";
+    bossActive = true;
+  }
+
+}, 1000);
+
 let enemies = [];
 let projectiles = [];
 let xpOrbs = [];

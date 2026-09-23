@@ -811,8 +811,6 @@ enemies.forEach(enemy => {
 
         enemy.hp -= damage;
 
-        projectile.element.remove();
-
         projectiles =
           projectiles.filter(
             p => p !== projectile
@@ -833,8 +831,6 @@ enemies.forEach(enemy => {
   projectile.y < -50 ||
   projectile.y > worldHeight + 50
 ) {
-
-      projectile.element.remove();
 
       projectiles =
         projectiles.filter(

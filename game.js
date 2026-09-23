@@ -144,23 +144,25 @@ function levelWeapon(id) {
       damage *= 1.4;
       projectileSize *= 1.3;
     }
+  }
 
   if (id === "arcane_beam") {
 
-  if (weapon.level === 2) {
-    // später: +25% Strahlschaden
-  }
+    if (weapon.level === 2) {
+      // später: +25% Strahlschaden
+    }
 
-  if (weapon.level === 3) {
-    // später: breiterer Strahl
-  }
+    if (weapon.level === 3) {
+      // später: breiterer Strahl
+    }
 
-  if (weapon.level === 4) {
-    // später: kürzere Abklingzeit
-  }
+    if (weapon.level === 4) {
+      // später: kürzere Abklingzeit
+    }
 
-  if (weapon.level === 5) {
-    // später: Strahl durchdringt mehrere Gegner
+    if (weapon.level === 5) {
+      // später: Strahl durchdringt mehrere Gegner
+    }
   }
 }
 

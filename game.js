@@ -256,6 +256,14 @@ if (wave >= 3 && Math.random() < 0.25) {
   enemy.classList.add("bat");
 }
 
+// Ab Welle 5 besteht eine Chance auf Tanks
+if (wave >= 5 && Math.random() < 0.15) {
+  enemyType = "tank";
+  enemy.innerHTML = "💀";
+  enemy.classList.remove("bat");
+  enemy.classList.add("tank");
+}
+
   let x;
 let y;
 

@@ -292,10 +292,6 @@ function closestEnemy() {
   return closest;
 }
 
-  return closest;
-}
-
-
 /* -------------------------
    SHOOT MAGIC
 ------------------------- */

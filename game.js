@@ -229,9 +229,23 @@ function showLevelUp() {
   choices.innerHTML = "";
 
   // Pool mischen und 3 unterschiedliche Upgrades nehmen
-  const randomUpgrades = [...upgradePool]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 3);
+  const availableUpgrades = upgradePool.filter(upgrade => {
+
+  if (upgrade.type === "weapon") {
+
+    const weapon = getWeapon(upgrade.weaponId);
+
+    if (weapon && weapon.level >= 5) {
+      return false;
+    }
+  }
+
+  return true;
+});
+
+const randomUpgrades = [...availableUpgrades]
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 3);
 
   randomUpgrades.forEach(upgrade => {
 

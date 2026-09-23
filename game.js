@@ -529,11 +529,11 @@ playerY = Math.max(
     /* Remove projectile outside screen */
 
     if (
-      projectile.x < -50 ||
-      projectile.x > window.innerWidth + 50 ||
-      projectile.y < -50 ||
-      projectile.y > window.innerHeight + 50
-    ) {
+  projectile.x < -50 ||
+  projectile.x > worldWidth + 50 ||
+  projectile.y < -50 ||
+  projectile.y > worldHeight + 50
+) {
 
       projectile.element.remove();
 

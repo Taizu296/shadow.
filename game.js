@@ -32,27 +32,57 @@ player.style.top = playerY + "px";
    TOUCH MOVEMENT
 ------------------------- */
 
-function setTarget(e) {
+const joystick = document.getElementById("joystick");
+const joystickKnob = document.getElementById("joystickKnob");
 
-  if (!gameRunning) return;
+let moveX = 0;
+let moveY = 0;
+
+function moveJoystick(e) {
+  e.preventDefault();
 
   const touch = e.touches[0];
+  const rect = joystick.getBoundingClientRect();
 
-  targetX = touch.clientX;
-  targetY = touch.clientY;
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  let dx = touch.clientX - centerX;
+  let dy = touch.clientY - centerY;
+
+  const distance = Math.hypot(dx, dy);
+  const maxDistance = 34;
+
+  if (distance > maxDistance) {
+    dx = (dx / distance) * maxDistance;
+    dy = (dy / distance) * maxDistance;
+  }
+
+  joystickKnob.style.transform =
+    `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+
+  moveX = dx / maxDistance;
+  moveY = dy / maxDistance;
 }
 
-document.addEventListener(
-  "touchstart",
-  setTarget,
-  { passive: false }
-);
+function stopJoystick() {
+  moveX = 0;
+  moveY = 0;
 
-document.addEventListener(
-  "touchmove",
-  setTarget,
-  { passive: false }
-);
+  joystickKnob.style.transform =
+    "translate(-50%, -50%)";
+}
+
+joystick.addEventListener("touchstart", moveJoystick, {
+  passive: false
+});
+
+joystick.addEventListener("touchmove", moveJoystick, {
+  passive: false
+});
+
+joystick.addEventListener("touchend", stopJoystick);
+joystick.addEventListener("touchcancel", stopJoystick);
 
 
 /* -------------------------
@@ -107,7 +137,6 @@ function spawnEnemy() {
   game.appendChild(enemy);
   enemies.push(enemyData);
 }
-
 
 /* -------------------------
    FIND CLOSEST ENEMY

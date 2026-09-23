@@ -125,6 +125,8 @@ function getBeamTarget() {
 function fireBeam() {
 
   if (!getWeapon("arcane_beam")) return;
+  
+    console.log("BEAM AKTIV");
 
   const now = performance.now();
 

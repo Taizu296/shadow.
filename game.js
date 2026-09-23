@@ -426,14 +426,14 @@ playerX += moveX * playerSpeed;
 playerY += moveY * playerSpeed;
 
   playerX = Math.max(
-    30,
-    Math.min(window.innerWidth - 30, playerX)
-  );
+  30,
+  Math.min(worldWidth - 30, playerX)
+);
 
-  playerY = Math.max(
-    100,
-    Math.min(window.innerHeight - 30, playerY)
-  );
+playerY = Math.max(
+  30,
+  Math.min(worldHeight - 30, playerY)
+);
 
   player.style.left = playerX + "px";
   player.style.top = playerY + "px";

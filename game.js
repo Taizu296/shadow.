@@ -23,6 +23,7 @@ let xpNeeded = 5;
 
 let enemies = [];
 let projectiles = [];
+let xpOrbs = [];
 
 let gameRunning = true;
 
@@ -348,7 +349,27 @@ function shoot() {
    KILL ENEMY
 ------------------------- */
 
+function spawnXpOrb(x, y) {
+
+  const orb = document.createElement("div");
+  orb.className = "xpOrb";
+
+  orb.style.left = x + "px";
+  orb.style.top = y + "px";
+
+  world.appendChild(orb);
+
+  xpOrbs.push({
+    element: orb,
+    x: x,
+    y: y,
+    value: 1
+  });
+}
+
 function killEnemy(enemy) {
+
+  spawnXpOrb(enemy.x, enemy.y);
 
   enemy.element.remove();
 

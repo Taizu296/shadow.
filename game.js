@@ -275,6 +275,17 @@ function showLevelUp() {
   // Pool mischen und 3 unterschiedliche Upgrades nehmen
   const availableUpgrades = upgradePool.filter(upgrade => {
 
+if (upgrade.type === "newWeapon") {
+
+  if (getWeapon(upgrade.weaponId)) {
+    return false;
+  }
+
+  if (activeWeapons.length >= maxActiveWeapons) {
+    return false;
+  }
+}
+
   if (upgrade.type === "weapon") {
 
     const weapon = getWeapon(upgrade.weaponId);

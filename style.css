@@ -154,16 +154,6 @@ body {
 
 /* ENEMIES */
 
-.boss {
-  font-size: 64px;
-  z-index: 20;
-}
-
-.tank {
-  font-size: 46px;
-  z-index: 15;
-}
-
 .enemy {
   position: absolute;
 
@@ -181,6 +171,16 @@ body {
   filter: drop-shadow(0 0 10px #ff304f);
 
   z-index: 10;
+}
+
+.boss {
+  font-size: 64px;
+  z-index: 20;
+}
+
+.tank {
+  font-size: 46px;
+  z-index: 15;
 }
 
 /* MAGIC PROJECTILE */

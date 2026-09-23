@@ -716,10 +716,6 @@ xpOrbs.forEach(orb => {
   }
 });
 
-  /* Move enemies */
-
-  enemies.forEach(enemy => {
-    
 /* DRAW ENEMIES ON CANVAS */
 
 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -759,6 +755,10 @@ enemies.forEach(enemy => {
     0,
     Math.PI * 2
   );
+
+  /* Move enemies */
+
+  enemies.forEach(enemy => {
 
   ctx.fillStyle = fillColor;
   ctx.fill();

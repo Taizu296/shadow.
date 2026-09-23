@@ -1,16 +1,18 @@
 const game = document.getElementById("game");
 const player = document.getElementById("player");
 
+const world = document.getElementById("world");
+
+const worldWidth = 3000;
+const worldHeight = 5000;
+
 const hpText = document.getElementById("hp");
 const killsText = document.getElementById("kills");
 const levelText = document.getElementById("level");
 const xpFill = document.getElementById("xpfill");
 
-let playerX = window.innerWidth / 2;
-let playerY = window.innerHeight / 2;
-
-let targetX = playerX;
-let targetY = playerY;
+let playerX = worldWidth / 2;
+let playerY = worldHeight / 2;
 
 let hp = 100;
 let kills = 0;

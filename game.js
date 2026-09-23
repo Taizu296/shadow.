@@ -452,19 +452,13 @@ function shoot() {
     const angle = baseAngle + offset;
 
     const projectileData = {
-      element: projectile,
+  x: playerX,
+  y: playerY,
+  vx: Math.cos(angle) * projectileSpeed,
+  vy: Math.sin(angle) * projectileSpeed
+};
 
-      x: playerX,
-      y: playerY,
-
-      vx: Math.cos(angle) * projectileSpeed,
-      vy: Math.sin(angle) * projectileSpeed
-    };
-
-    projectile.style.left = playerX + "px";
-    projectile.style.top = playerY + "px";
-
-    projectiles.push(projectileData);
+projectiles.push(projectileData);
   }
 }
 

@@ -495,6 +495,14 @@ function spawnXpOrb(x, y, value = 1) {
 
   const orb = document.createElement("div");
   orb.className = "xpOrb";
+  
+  if (value >= 15) {
+  orb.classList.add("xpBoss");
+} else if (value >= 5) {
+  orb.classList.add("xpLarge");
+} else if (value >= 2) {
+  orb.classList.add("xpMedium");
+}
 
   orb.style.left = x + "px";
   orb.style.top = y + "px";

@@ -299,12 +299,16 @@ if (upgrade.type === "newWeapon") {
 
   if (upgrade.type === "weapon") {
 
-    const weapon = getWeapon(upgrade.weaponId);
+  const weapon = getWeapon(upgrade.weaponId);
 
-    if (weapon && weapon.level >= 5) {
-      return false;
-    }
+  if (!weapon) {
+    return false;
   }
+
+  if (weapon.level >= 5) {
+    return false;
+  }
+}
 
   return true;
 });

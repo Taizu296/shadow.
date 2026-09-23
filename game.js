@@ -293,26 +293,16 @@ function spawnEnemy() {
 
   if (!gameRunning) return;
 
-  const enemy = document.createElement("div");
-
-  enemy.className = "enemy";
-  enemy.innerHTML = "👹";
-
 let enemyType = "demon";
 
 // Ab Welle 3 besteht eine Chance auf schnelle Gegner
 if (wave >= 3 && Math.random() < 0.25) {
   enemyType = "bat";
-  enemy.innerHTML = "🦇";
-  enemy.classList.add("bat");
 }
 
 // Ab Welle 5 besteht eine Chance auf Tanks
 if (wave >= 5 && Math.random() < 0.15) {
   enemyType = "tank";
-  enemy.innerHTML = "💀";
-  enemy.classList.remove("bat");
-  enemy.classList.add("tank");
 }
 
   let x;
@@ -369,7 +359,6 @@ if (enemyType === "tank") {
 }
 
 const enemyData = {
-  element: enemy,
   x: x,
   y: y,
   hp: enemyHp,
@@ -377,11 +366,7 @@ const enemyData = {
   type: enemyType
 };
 
-  enemy.style.left = x + "px";
-  enemy.style.top = y + "px";
-
-  world.appendChild(enemy);
-  enemies.push(enemyData);
+enemies.push(enemyData);
 }
 
 function startSwarm() {

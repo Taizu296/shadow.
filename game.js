@@ -99,6 +99,7 @@ let beamCooldown = 2200;
 let beamWidth = 12;
 let beamRange = 550;
 let lastBeamTime = 0;
+let activeBeam = null;
 
 function getBeamTarget() {
 

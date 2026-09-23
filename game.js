@@ -678,7 +678,25 @@ xpOrbs.forEach(orb => {
    START
 ------------------------- */
 
-setInterval(spawnEnemy, 1100);
+let enemySpawnInterval;
+
+function startEnemySpawning() {
+
+  clearInterval(enemySpawnInterval);
+
+  // Jede Welle spawnen Gegner schneller
+  const spawnRate = Math.max(
+    350,
+    1100 - (wave - 1) * 70
+  );
+
+  enemySpawnInterval = setInterval(
+    spawnEnemy,
+    spawnRate
+  );
+}
+
+startEnemySpawning();
 
 let shootInterval = setInterval(shoot, attackSpeed);
 

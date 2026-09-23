@@ -146,6 +146,28 @@ function showLevelUp() {
 player.style.left = playerX + "px";
 player.style.top = playerY + "px";
 
+/* CAMERA */
+
+let cameraX =
+  playerX - window.innerWidth / 2;
+
+let cameraY =
+  playerY - window.innerHeight / 2;
+
+/* Kamera an den Map-Rändern stoppen */
+
+cameraX = Math.max(
+  0,
+  Math.min(worldWidth - window.innerWidth, cameraX)
+);
+
+cameraY = Math.max(
+  0,
+  Math.min(worldHeight - window.innerHeight, cameraY)
+);
+
+world.style.transform =
+  `translate(${-cameraX}px, ${-cameraY}px)`;
 
 /* -------------------------
    TOUCH MOVEMENT

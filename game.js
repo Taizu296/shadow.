@@ -491,7 +491,7 @@ function shoot() {
    KILL ENEMY
 ------------------------- */
 
-function spawnXpOrb(x, y) {
+function spawnXpOrb(x, y, value = 1) {
 
   const orb = document.createElement("div");
   orb.className = "xpOrb";
@@ -505,13 +505,27 @@ function spawnXpOrb(x, y) {
     element: orb,
     x: x,
     y: y,
-    value: 1
+    value: value
   });
 }
 
 function killEnemy(enemy) {
 
-  spawnXpOrb(enemy.x, enemy.y);
+  let xpValue = 1;
+
+if (enemy.type === "bat") {
+  xpValue = 2;
+}
+
+if (enemy.type === "tank") {
+  xpValue = 5;
+}
+
+if (enemy.isBoss) {
+  xpValue = 15 + wave * 3;
+}
+
+spawnXpOrb(enemy.x, enemy.y, xpValue);
 
   enemy.element.remove();
 

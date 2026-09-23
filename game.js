@@ -243,29 +243,37 @@ function spawnEnemy() {
   enemy.innerHTML = "👹";
 
   let x;
-  let y;
+let y;
 
-  const side = Math.floor(Math.random() * 4);
+const side = Math.floor(Math.random() * 4);
 
-  if (side === 0) {
-    x = Math.random() * window.innerWidth;
-    y = -40;
-  }
+const spawnDistanceX = window.innerWidth / 2 + 80;
+const spawnDistanceY = window.innerHeight / 2 + 80;
 
-  if (side === 1) {
-    x = window.innerWidth + 40;
-    y = Math.random() * window.innerHeight;
-  }
+if (side === 0) {
+  x = playerX + (Math.random() - 0.5) * window.innerWidth;
+  y = playerY - spawnDistanceY;
+}
 
-  if (side === 2) {
-    x = Math.random() * window.innerWidth;
-    y = window.innerHeight + 40;
-  }
+if (side === 1) {
+  x = playerX + spawnDistanceX;
+  y = playerY + (Math.random() - 0.5) * window.innerHeight;
+}
 
-  if (side === 3) {
-    x = -40;
-    y = Math.random() * window.innerHeight;
-  }
+if (side === 2) {
+  x = playerX + (Math.random() - 0.5) * window.innerWidth;
+  y = playerY + spawnDistanceY;
+}
+
+if (side === 3) {
+  x = playerX - spawnDistanceX;
+  y = playerY + (Math.random() - 0.5) * window.innerHeight;
+}
+
+/* Innerhalb der Map halten */
+
+x = Math.max(30, Math.min(worldWidth - 30, x));
+y = Math.max(30, Math.min(worldHeight - 30, y));
 
   const enemyData = {
     element: enemy,
@@ -278,7 +286,7 @@ function spawnEnemy() {
   enemy.style.left = x + "px";
   enemy.style.top = y + "px";
 
-  game.appendChild(enemy);
+  world.appendChild(enemy);
   enemies.push(enemyData);
 }
 

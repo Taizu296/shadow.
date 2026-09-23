@@ -160,6 +160,15 @@ const upgradePool = [
   }
 },
   
+const weaponPool = [
+  {
+    id: "arcane_beam",
+    name: "Magiestrahl",
+    icon: "🟣",
+    element: "arcane"
+  }
+];
+  
   {
     icon: "🔥",
     name: "Magische Macht",

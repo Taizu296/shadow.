@@ -2,22 +2,50 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no"
+  >
   <title>Shadow Hunters</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div id="game">
-    <div id="hud">
-      <h1>SHADOW HUNTERS</h1>
-      <div>❤️ <span id="hp">100</span></div>
-      <div>⚡ Level <span id="level">1</span></div>
+<div id="game">
+
+  <div id="hud">
+    <div class="title">SHADOW HUNTERS</div>
+
+    <div class="stats">
+      ❤️ <span id="hp">100</span>
+      &nbsp;&nbsp;
+      ☠️ <span id="kills">0</span>
     </div>
 
-    <div id="player">🔮</div>
+    <div class="level">
+      LV. <span id="level">1</span>
+    </div>
+
+    <div class="xpbar">
+      <div id="xpfill"></div>
+    </div>
   </div>
 
-  <script src="game.js"></script>
+  <div id="player">
+    <div class="playerAura"></div>
+    <div class="mage">🔮</div>
+  </div>
+
+  <div id="gameOver">
+    <h1>GAME OVER</h1>
+    <p>Kills: <span id="finalKills">0</span></p>
+    <button onclick="location.reload()">NEUSTART</button>
+  </div>
+
+</div>
+
+<script src="game.js"></script>
+
 </body>
 </html>

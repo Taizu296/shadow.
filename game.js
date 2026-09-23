@@ -425,21 +425,26 @@ playerY = Math.max(
 
 /* CAMERA FOLLOW */
 
-let cameraX = playerX - window.innerWidth / 2;
-let cameraY = playerY - window.innerHeight / 2;
+/* CAMERA FOLLOW */
 
-cameraX = Math.max(
+const cameraX = Math.max(
   0,
-  Math.min(worldWidth - window.innerWidth, cameraX)
+  Math.min(
+    playerX - window.innerWidth / 2,
+    worldWidth - window.innerWidth
+  )
 );
 
-cameraY = Math.max(
+const cameraY = Math.max(
   0,
-  Math.min(worldHeight - window.innerHeight, cameraY)
+  Math.min(
+    playerY - window.innerHeight / 2,
+    worldHeight - window.innerHeight
+  )
 );
 
-world.style.transform =
-  `translate(${-cameraX}px, ${-cameraY}px)`;
+world.style.left = -cameraX + "px";
+world.style.top = -cameraY + "px";
 
   /* Move enemies */
 

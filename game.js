@@ -312,6 +312,11 @@ if (enemyType === "bat") {
   enemySpeed *= 1.6;
 }
 
+if (enemyType === "tank") {
+  enemyHp = baseHp * 3;
+  enemySpeed *= 0.55;
+}
+
 const enemyData = {
   element: enemy,
   x: x,

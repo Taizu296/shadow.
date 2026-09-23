@@ -252,6 +252,17 @@ const randomUpgrades = [...availableUpgrades]
     const card = document.createElement("div");
     card.className = "upgradeCard";
 
+let displayName = upgrade.name;
+
+if (upgrade.type === "weapon") {
+  const weapon = getWeapon(upgrade.weaponId);
+
+  if (weapon) {
+    displayName =
+      `${upgrade.name} Lv.${weapon.level + 1}`;
+  }
+}
+
     card.innerHTML = `
       <div class="upgradeIcon">${upgrade.icon}</div>
 

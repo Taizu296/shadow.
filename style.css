@@ -215,7 +215,10 @@ body {
 
 #joystick {
   position: absolute;
-  left: 30px;
+  left: 50%;
+transform: translateX(-50%);
+opacity: 0.45;
+transition: opacity 0.2s ease;
   bottom: max(35px, env(safe-area-inset-bottom));
 
   width: 120px;

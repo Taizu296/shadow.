@@ -548,8 +548,6 @@ if (enemy.isBoss) {
 
 spawnXpOrb(enemy.x, enemy.y, xpValue);
 
-  enemy.element.remove();
-
   enemies = enemies.filter(e => e !== enemy);
 
   kills++;
@@ -745,13 +743,6 @@ xpOrbs.forEach(orb => {
 
     enemy.y +=
       (dy / distance) * enemy.speed;
-
-    enemy.element.style.left =
-      enemy.x + "px";
-
-    enemy.element.style.top =
-      enemy.y + "px";
-
 
     /* Enemy hits player */
 

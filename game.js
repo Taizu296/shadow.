@@ -538,6 +538,15 @@ function gameOver() {
 
   gameRunning = false;
 
+  document.getElementById("finalScore")
+    .textContent = score;
+
+  document.getElementById("finalHighscore")
+    .textContent = highscore;
+
+  document.getElementById("finalWave")
+    .textContent = wave;
+
   document.getElementById("finalKills")
     .textContent = kills;
 

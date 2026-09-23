@@ -159,6 +159,11 @@ body {
   z-index: 20;
 }
 
+.tank {
+  font-size: 46px;
+  z-index: 15;
+}
+
 .enemy {
   position: absolute;
 

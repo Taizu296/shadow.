@@ -126,7 +126,7 @@ function fireBeam() {
 
   if (!getWeapon("arcane_beam")) return;
   
-    console.log("BEAM AKTIV");
+    document.body.style.border = "5px solid purple";
 
   const now = performance.now();
 

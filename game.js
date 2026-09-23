@@ -447,6 +447,8 @@ function killEnemy(enemy) {
     wave++;
 
     waveTime = 60;
+    
+    startEnemySpawning();
 
     waveText.textContent = wave;
     waveTimerText.textContent = waveTime;

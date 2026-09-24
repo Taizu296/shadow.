@@ -142,6 +142,20 @@ function fireBeam() {
       return;
     }
 
+    if (
+      now - lastBeamDamageTime >=
+      beamDamageInterval
+    ) {
+      target.hp -= beamDamage;
+      lastBeamDamageTime = now;
+
+      if (target.hp <= 0) {
+        killEnemy(target);
+        activeBeam = null;
+        return;
+      }
+    }
+
     activeBeam = {
       startX: playerX,
       startY: playerY,

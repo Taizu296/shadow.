@@ -1010,37 +1010,23 @@ xpOrbs.forEach(orb => {
   ctx.fill();
 });
 
-/* DRAW ARCANE BEAM */
+/* DRAW ARCANE BEAMS */
 
-if (activeBeam) {
+activeBeams.forEach(beam => {
 
   // Äußeres Leuchten
   ctx.beginPath();
-  ctx.moveTo(
-    activeBeam.startX,
-    activeBeam.startY
-  );
-  ctx.lineTo(
-    activeBeam.endX,
-    activeBeam.endY
-  );
-
-  ctx.lineWidth = beamWidth + 14;
+  ctx.moveTo(beam.startX, beam.startY);
+  ctx.lineTo(beam.endX, beam.endY);
+  ctx.lineWidth = beamWidth + 16;
   ctx.strokeStyle = "rgba(190, 90, 255, 0.25)";
   ctx.lineCap = "round";
   ctx.stroke();
 
   // Hauptstrahl
   ctx.beginPath();
-  ctx.moveTo(
-    activeBeam.startX,
-    activeBeam.startY
-  );
-  ctx.lineTo(
-    activeBeam.endX,
-    activeBeam.endY
-  );
-
+  ctx.moveTo(beam.startX, beam.startY);
+  ctx.lineTo(beam.endX, beam.endY);
   ctx.lineWidth = beamWidth;
   ctx.strokeStyle = "#b84dff";
   ctx.lineCap = "round";
@@ -1048,20 +1034,13 @@ if (activeBeam) {
 
   // Heller Energiekern
   ctx.beginPath();
-  ctx.moveTo(
-    activeBeam.startX,
-    activeBeam.startY
-  );
-  ctx.lineTo(
-    activeBeam.endX,
-    activeBeam.endY
-  );
-
+  ctx.moveTo(beam.startX, beam.startY);
+  ctx.lineTo(beam.endX, beam.endY);
   ctx.lineWidth = 4;
   ctx.strokeStyle = "#f3d9ff";
   ctx.lineCap = "round";
   ctx.stroke();
-}
+});
 
 /* DRAW PROJECTILES ON CANVAS */
 

@@ -1824,6 +1824,32 @@ function killEnemy(enemy) {
   state.kills++;
   state.score +=
     enemy.score;
+    
+    /* =========================================
+   RANDOM HEALTH DROP
+========================================= */
+
+let healthDropChance = 0.025; // 2,5 %
+
+if (enemy.type === "elite") {
+  healthDropChance = 0.18;
+}
+
+if (enemy.type === "boss") {
+  healthDropChance = 1;
+}
+
+if (
+  Math.random() < healthDropChance &&
+  healthDrops.length < 12
+) {
+  healthDrops.push({
+    x: enemy.x,
+    y: enemy.y,
+    radius: 12,
+    healPercent: 0.30
+  });
+}
 
   xpOrbs.push({
 
@@ -1924,6 +1950,48 @@ function updateXp(dt) {
   }
 }
 
+function updateHealthDrops() {
+
+  for (
+    let i = healthDrops.length - 1;
+    i >= 0;
+    i--
+  ) {
+
+    const drop = healthDrops[i];
+
+    const dx = player.x - drop.x;
+    const dy = player.y - drop.y;
+
+    const distance = Math.hypot(dx, dy);
+
+    if (
+      distance <
+      PLAYER_RADIUS + 22
+    ) {
+
+      const heal =
+        player.maxHp *
+        drop.healPercent;
+
+      player.hp =
+        Math.min(
+          player.maxHp,
+          player.hp + heal
+        );
+
+      healthDrops.splice(i, 1);
+
+      effects.push({
+        type: "heal",
+        x: player.x,
+        y: player.y,
+        life: 0.6,
+        maxLife: 0.6
+      });
+    }
+  }
+}
 
 function checkLevelUp() {
 
@@ -1939,7 +2007,10 @@ function checkLevelUp() {
 
   state.level++;
 
-  state.xpNeeded =
+/* LEVEL-UP = VOLLES LEBEN */
+player.hp = player.maxHp;
+
+state.xpNeeded =
     Math.ceil(
       8 +
       state.level * 4.4 +
@@ -3126,6 +3197,55 @@ function drawXp() {
   }
 }
 
+function drawHealthDrops() {
+
+  for (const drop of healthDrops) {
+
+    const p =
+      worldToScreen(
+        drop.x,
+        drop.y
+      );
+
+    ctx.save();
+
+    ctx.shadowBlur = 18;
+    ctx.shadowColor = "#ff3e55";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      11,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle =
+      "rgba(120, 15, 30, 0.92)";
+
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+
+    ctx.fillStyle = "#ffffff";
+
+    ctx.font =
+      "bold 15px Arial";
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    ctx.fillText(
+      "♥",
+      p.x,
+      p.y + 1
+    );
+
+    ctx.restore();
+  }
+}
 
 /* =========================================================
    DRAW PROJECTILES

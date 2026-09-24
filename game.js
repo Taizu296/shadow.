@@ -1009,31 +1009,53 @@ xpOrbs.forEach(orb => {
 
 if (activeBeam) {
 
-  const beamAge =
-    performance.now() - activeBeam.createdAt;
+  // Äußeres Leuchten
+  ctx.beginPath();
+  ctx.moveTo(
+    activeBeam.startX,
+    activeBeam.startY
+  );
+  ctx.lineTo(
+    activeBeam.endX,
+    activeBeam.endY
+  );
 
-  if (beamAge < 700) {
+  ctx.lineWidth = beamWidth + 14;
+  ctx.strokeStyle = "rgba(190, 90, 255, 0.25)";
+  ctx.lineCap = "round";
+  ctx.stroke();
 
-    ctx.beginPath();
+  // Hauptstrahl
+  ctx.beginPath();
+  ctx.moveTo(
+    activeBeam.startX,
+    activeBeam.startY
+  );
+  ctx.lineTo(
+    activeBeam.endX,
+    activeBeam.endY
+  );
 
-    ctx.moveTo(
-      activeBeam.startX,
-      activeBeam.startY
-    );
+  ctx.lineWidth = beamWidth;
+  ctx.strokeStyle = "#b84dff";
+  ctx.lineCap = "round";
+  ctx.stroke();
 
-    ctx.lineTo(
-      activeBeam.endX,
-      activeBeam.endY
-    );
+  // Heller Energiekern
+  ctx.beginPath();
+  ctx.moveTo(
+    activeBeam.startX,
+    activeBeam.startY
+  );
+  ctx.lineTo(
+    activeBeam.endX,
+    activeBeam.endY
+  );
 
-    ctx.lineWidth = beamWidth;
-    ctx.strokeStyle = "#c266ff";
-    ctx.lineCap = "round";
-    ctx.stroke();
-
-  } else {
-    activeBeam = null;
-  }
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "#f3d9ff";
+  ctx.lineCap = "round";
+  ctx.stroke();
 }
 
 /* DRAW PROJECTILES ON CANVAS */

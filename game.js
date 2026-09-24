@@ -133,40 +133,61 @@ function fireBeam() {
 
   const now = performance.now();
 
-  // Strahl ist bereits aktiv
+  // Strahl-Phase aktiv
   if (now < beamActiveUntil) {
 
-    const target = getBeamTarget();
+    const targets = [...enemies]
+      .map(enemy => ({
+        enemy,
+        distance: Math.hypot(
+          enemy.x - playerX,
+          enemy.y - playerY
+        )
+      }))
+      .filter(item => item.distance <= beamRange)
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, beamCount);
 
-    if (!target) {
-      activeBeam = null;
-      return;
-    }
-
-    if (
-      now - lastBeamDamageTime >=
-      beamDamageInterval
-    ) {
-      target.hp -= beamDamage;
-      lastBeamDamageTime = now;
-
-      if (target.hp <= 0) {
-        killEnemy(target);
-        activeBeam = null;
-        return;
-      }
-    }
-
-    activeBeam = {
+    activeBeams = targets.map(item => ({
       startX: playerX,
       startY: playerY,
-      endX: target.x,
-      endY: target.y,
-      createdAt: now
-    };
+      endX: item.enemy.x,
+      endY: item.enemy.y
+    }));
 
     return;
   }
+
+  // Pause zwischen den Strahl-Phasen
+  if (now - lastBeamTime < beamCooldown) {
+    activeBeams = [];
+    return;
+  }
+
+  const targets = [...enemies]
+    .map(enemy => ({
+      enemy,
+      distance: Math.hypot(
+        enemy.x - playerX,
+        enemy.y - playerY
+      )
+    }))
+    .filter(item => item.distance <= beamRange)
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, beamCount);
+
+  if (targets.length === 0) return;
+
+  lastBeamTime = now;
+  beamActiveUntil = now + beamDuration;
+
+  activeBeams = targets.map(item => ({
+    startX: playerX,
+    startY: playerY,
+    endX: item.enemy.x,
+    endY: item.enemy.y
+  }));
+}
 
   // Abklingzeit
   if (now - lastBeamTime < beamCooldown) {

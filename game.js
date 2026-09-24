@@ -104,6 +104,7 @@ let beamDuration = 2000;
 let beamActiveUntil = 0;
 let beamDamageInterval = 200;
 let lastBeamDamageTime = 0;
+let beamCount = 1;
 
 function getBeamTarget() {
 

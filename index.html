@@ -2,84 +2,446 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
   >
+
+  <meta name="theme-color" content="#11131a">
+
   <title>Shadow Hunters</title>
-  <link rel="stylesheet" href="style.css?v=17">
+
+  <link rel="stylesheet" href="style.css?v=1">
 </head>
 
 <body>
 
-<div id="game">
-  
-  <div id="hud">
-    <div class="title">SHADOW HUNTERS</div>
+<div id="app">
 
-    <div class="stats">
-      ❤️ <span id="hp">100</span>
-      &nbsp;&nbsp;
-      ☠️ <span id="kills">0</span>
+  <!-- =========================
+       STARTMENÜ
+  ========================== -->
+
+  <section id="startScreen" class="screen active">
+
+    <div class="startPanel">
+
+      <div class="gameLogo">
+        SHADOW
+        <span>HUNTERS</span>
+      </div>
+
+      <div class="subtitle">
+        DARK FANTASY SURVIVOR
+      </div>
+
+      <label class="nameLabel" for="playerName">
+        SPIELERNAME
+      </label>
+
+      <input
+        id="playerName"
+        maxlength="16"
+        autocomplete="off"
+        placeholder="Name eingeben"
+      >
+
+      <button id="continueButton" class="mainButton">
+        WEITER
+      </button>
+
     </div>
 
-    <div class="level">
-  WAVE <span id="wave">1</span>
-  &nbsp;•&nbsp;
-  <span id="waveTimer">30</span>s
-  &nbsp;•&nbsp;
-  LV. <span id="level">1</span>
-</div>
+  </section>
 
-<div class="score">
-  SCORE <span id="score">0</span>
-  &nbsp;•&nbsp;
-  BEST <span id="highscore">0</span>
-</div>
 
-    <div class="xpbar">
-      <div id="xpfill"></div>
+  <!-- =========================
+       CHARAKTERAUSWAHL
+  ========================== -->
+
+  <section id="characterScreen" class="screen">
+
+    <div class="menuHeader">
+      <h1>CHARAKTER AUSWÄHLEN</h1>
+      <p>Wähle deinen Hunter</p>
     </div>
-  </div>
-  
-  <div id="world">
 
-  <canvas id="gameCanvas"></canvas>
+    <div id="characterGrid">
 
-  <div id="player">
-    <div class="playerAura"></div>
-    <div class="mage">🔮</div>
-  </div>
+      <button
+        class="characterCard selected"
+        data-character="mage"
+      >
+        <div class="characterPortrait magePortrait">
+          ✦
+        </div>
+
+        <div class="characterInfo">
+          <h2>MAGIER</h2>
+          <span>Shamane</span>
+
+          <p>
+            Fernkampf · AoE · Kontrolle
+          </p>
+
+          <strong>
+            Basis: Magiekugeln
+          </strong>
+        </div>
+      </button>
+
+
+      <button
+        class="characterCard"
+        data-character="vampire"
+      >
+        <div class="characterPortrait vampirePortrait">
+          ☠
+        </div>
+
+        <div class="characterInfo">
+          <h2>SEELENVAMPIR</h2>
+          <span>Corrupted Sura</span>
+
+          <p>
+            Seelen · Heilung · Beschwörung
+          </p>
+
+          <strong>
+            Basis: Seelendieb
+          </strong>
+        </div>
+      </button>
+
+
+      <button
+        class="characterCard"
+        data-character="assassin"
+      >
+        <div class="characterPortrait assassinPortrait">
+          ◈
+        </div>
+
+        <div class="characterInfo">
+          <h2>ASSASSINE</h2>
+          <span>Phantom Assassin</span>
+
+          <p>
+            Tempo · Crit · Schatten
+          </p>
+
+          <strong>
+            Basis: Kunai
+          </strong>
+        </div>
+      </button>
+
+
+      <button
+        class="characterCard"
+        data-character="tank"
+      >
+        <div class="characterPortrait tankPortrait">
+          ⚔
+        </div>
+
+        <div class="characterInfo">
+          <h2>KATANA-TANK</h2>
+          <span>Wandering Juggernaut</span>
+
+          <p>
+            Defense · Kontrolle · Nahkampf
+          </p>
+
+          <strong>
+            Basis: Katana-Hieb
+          </strong>
+        </div>
+      </button>
+
+    </div>
+
+
+    <div class="characterActions">
+
+      <button id="backToStart" class="secondaryButton">
+        ZURÜCK
+      </button>
+
+      <button id="startGameButton" class="mainButton">
+        RUN STARTEN
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SPIEL
+  ========================== -->
+
+  <section id="gameScreen" class="screen">
+
+    <canvas id="gameCanvas"></canvas>
+
+
+    <!-- PARTY / HP -->
+
+    <div id="partyHud">
+
+      <div class="partyMember">
+
+        <div
+          id="playerPortrait"
+          class="partyPortrait"
+        >
+          ✦
+        </div>
+
+        <div class="partyData">
+
+          <div class="partyNameRow">
+
+            <span id="hudPlayerName">
+              PLAYER
+            </span>
+
+            <span id="hpNumber">
+              100 / 100
+            </span>
+
+          </div>
+
+          <div class="hpBar">
+            <div id="hpFill"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- TIMER -->
+
+    <div id="timerHud">
+      <span id="runTimer">00:00</span>
+    </div>
+
+
+    <!-- BOSS HP -->
+
+    <div id="bossHud">
+
+      <div id="bossName">
+        DÄMONENFÜRST
+      </div>
+
+      <div class="bossBar">
+        <div id="bossHpFill"></div>
+      </div>
+
+    </div>
+
+
+    <!-- SKILLS LINKS -->
+
+    <div id="skillHud">
+
+      <div
+        class="skillSlot baseSkill activeSkill"
+        data-slot="base"
+      >
+        <span class="skillIcon">✦</span>
+        <small>LV.1</small>
+      </div>
+
+      <div class="skillSlot" data-slot="1">
+        <span>+</span>
+      </div>
+
+      <div class="skillSlot" data-slot="2">
+        <span>+</span>
+      </div>
+
+      <div class="skillSlot" data-slot="3">
+        <span>+</span>
+      </div>
+
+    </div>
+
+
+    <!-- PAUSE -->
+
+    <button id="pauseButton">
+      Ⅱ
+    </button>
+
+
+    <!-- MOVEMENT STICK -->
+
+    <div
+      id="moveJoystick"
+      class="joystick"
+    >
+      <div class="joystickRing"></div>
+      <div id="moveKnob" class="joystickKnob"></div>
+    </div>
+
+
+    <!-- AIM STICK -->
+
+    <div
+      id="aimJoystick"
+      class="joystick"
+    >
+      <div class="joystickRing"></div>
+      <div id="aimKnob" class="joystickKnob"></div>
+    </div>
+
+
+    <!-- EXP -->
+
+    <div id="xpHud">
+
+      <div id="xpFill"></div>
+
+      <span id="levelText">
+        LV. 1
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       LEVEL UP
+  ========================== -->
+
+  <section id="levelUpScreen" class="overlay">
+
+    <div class="upgradeWindow">
+
+      <h1>LEVEL UP</h1>
+
+      <p>Wähle ein Upgrade</p>
+
+      <div id="upgradeChoices">
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PAUSE
+  ========================== -->
+
+  <section id="pauseScreen" class="overlay">
+
+    <div class="pauseWindow">
+
+      <h1>PAUSE</h1>
+
+      <div id="pauseBuild">
+      </div>
+
+      <button id="resumeButton" class="mainButton">
+        WEITERSPIELEN
+      </button>
+
+      <button id="quitButton" class="secondaryButton">
+        RUN BEENDEN
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       BOSS BESIEGT
+  ========================== -->
+
+  <section id="victoryScreen" class="overlay">
+
+    <div class="resultWindow">
+
+      <div class="victoryLabel">
+        RUN GESCHAFFT
+      </div>
+
+      <h1>END-BOSS BESIEGT</h1>
+
+      <p>
+        Du kannst den Run jetzt beenden oder
+        dich dem Infinity-Modus stellen.
+      </p>
+
+      <button id="infinityButton" class="mainButton">
+        ∞ INFINITY RUN
+      </button>
+
+      <button id="finishRunButton" class="secondaryButton">
+        RUN BEENDEN
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       GAME OVER
+  ========================== -->
+
+  <section id="gameOverScreen" class="overlay">
+
+    <div class="resultWindow">
+
+      <h1>GAME OVER</h1>
+
+      <div class="resultStats">
+
+        <div>
+          <span>ZEIT</span>
+          <strong id="finalTime">00:00</strong>
+        </div>
+
+        <div>
+          <span>KILLS</span>
+          <strong id="finalKills">0</strong>
+        </div>
+
+        <div>
+          <span>SCORE</span>
+          <strong id="finalScore">0</strong>
+        </div>
+
+        <div>
+          <span>BEST</span>
+          <strong id="finalBest">0</strong>
+        </div>
+
+      </div>
+
+      <button id="restartButton" class="mainButton">
+        NEUER RUN
+      </button>
+
+    </div>
+
+  </section>
 
 </div>
 
-<div id="joystick">
-  <div id="joystickKnob"></div>
-</div>
 
-<div id="levelUp">
-  <div class="levelUpBox">
-    <div class="levelUpTitle">LEVEL UP</div>
-    <div class="levelUpSubtitle">Wähle ein Upgrade</div>
-
-    <div id="upgradeChoices"></div>
-  </div>
-</div>
-
-  <div id="gameOver">
-  <h1>GAME OVER</h1>
-
-  <p>Score: <span id="finalScore">0</span></p>
-  <p>Best: <span id="finalHighscore">0</span></p>
-  <p>Wave: <span id="finalWave">1</span></p>
-  <p>Kills: <span id="finalKills">0</span></p>
-
-  <button onclick="location.reload()">NEUSTART</button>
-</div>
-
-</div>
-
-<script src="game.js?v=30"></script>
+<script src="game.js?v=1"></script>
 
 </body>
 </html>

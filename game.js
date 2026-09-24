@@ -881,6 +881,7 @@ function startGame() {
   enemies = [];
   projectiles = [];
   xpOrbs = [];
+  healthDrops = [];
   effects = [];
 
   selectedSkills = [];

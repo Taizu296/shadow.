@@ -72,8 +72,8 @@ const CAMERA_ZOOM = 0.58;
 const MAX_SKILLS = 3;
 const MAX_PASSIVES = 4;
 
-const MAX_ENEMIES = 260;
-const MAX_PROJECTILES = 220;
+const MAX_ENEMIES = 180;
+const MAX_PROJECTILES = 160;
 
 const PLAYER_RADIUS = 22;
 
@@ -3621,6 +3621,7 @@ function draw() {
 
   drawWorld();
   drawXp();
+  drawHealthDrops();
   drawEnemies();
   drawProjectiles();
   drawEffects();
@@ -3767,6 +3768,7 @@ function gameLoop(now) {
 
       updateProjectiles(dt);
       updateXp(dt);
+      updateHealthDrops();
       updateEffects(dt);
 
       updateCamera();

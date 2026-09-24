@@ -439,6 +439,7 @@ let player = null;
 let enemies = [];
 let projectiles = [];
 let xpOrbs = [];
+let healthDrops = [];
 let effects = [];
 let obstacles = [];
 

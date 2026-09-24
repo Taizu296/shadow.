@@ -248,6 +248,8 @@ function levelWeapon(id) {
   beamCount = weapon.level;
 }
 
+}
+
 const weaponPool = [
   {
     id: "arcane_beam",

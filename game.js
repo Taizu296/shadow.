@@ -189,28 +189,6 @@ function fireBeam() {
   }));
 }
 
-  // Abklingzeit
-  if (now - lastBeamTime < beamCooldown) {
-    activeBeam = null;
-    return;
-  }
-
-  const target = getBeamTarget();
-
-  if (!target) return;
-
-  lastBeamTime = now;
-  beamActiveUntil = now + beamDuration;
-
-  activeBeam = {
-    startX: playerX,
-    startY: playerY,
-    endX: target.x,
-    endY: target.y,
-    createdAt: now
-  };
-}
-
 /* -------------------------
    WEAPON SYSTEM
 ------------------------- */

@@ -127,12 +127,33 @@ function getBeamTarget() {
 function fireBeam() {
 
   if (!getWeapon("arcane_beam")) return;
-  
-    document.body.style.border = "5px solid purple";
 
   const now = performance.now();
 
+  // Strahl ist bereits aktiv
+  if (now < beamActiveUntil) {
+
+    const target = getBeamTarget();
+
+    if (!target) {
+      activeBeam = null;
+      return;
+    }
+
+    activeBeam = {
+      startX: playerX,
+      startY: playerY,
+      endX: target.x,
+      endY: target.y,
+      createdAt: now
+    };
+
+    return;
+  }
+
+  // Abklingzeit
   if (now - lastBeamTime < beamCooldown) {
+    activeBeam = null;
     return;
   }
 
@@ -141,8 +162,7 @@ function fireBeam() {
   if (!target) return;
 
   lastBeamTime = now;
-
-  target.hp -= beamDamage;
+  beamActiveUntil = now + beamDuration;
 
   activeBeam = {
     startX: playerX,
@@ -151,10 +171,6 @@ function fireBeam() {
     endY: target.y,
     createdAt: now
   };
-
-  if (target.hp <= 0) {
-    killEnemy(target);
-  }
 }
 
 /* -------------------------

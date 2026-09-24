@@ -100,6 +100,8 @@ let beamWidth = 12;
 let beamRange = 550;
 let lastBeamTime = 0;
 let activeBeam = null;
+let beamDuration = 2000;
+let beamActiveUntil = 0;
 
 function getBeamTarget() {
 
